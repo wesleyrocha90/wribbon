@@ -2,13 +2,12 @@ package br.com.ceos.wribbon.testes;
 
 import br.com.ceos.wribbon.WRichTooltip;
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 /**
  *
@@ -47,7 +46,9 @@ public class MainTest extends Application{
       p.hide();
     });
     
-    StackPane root = new StackPane();
+    VBox root = new VBox();
+    root.setFillWidth(true);
+    root.setAlignment(Pos.TOP_CENTER);
     root.getChildren().add(button);
     primaryStage.setScene(new Scene(root));
     primaryStage.setMaximized(true);

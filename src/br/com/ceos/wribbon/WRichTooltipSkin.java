@@ -4,7 +4,6 @@ import com.sun.javafx.scene.control.behavior.BehaviorBase;
 import com.sun.javafx.scene.control.behavior.KeyBinding;
 import com.sun.javafx.scene.control.skin.BehaviorSkinBase;
 import java.util.Collections;
-import java.util.function.Consumer;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -14,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
@@ -23,7 +21,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
@@ -34,7 +31,7 @@ import javafx.scene.text.FontWeight;
  */
 public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBase<WRichTooltip>> {
   
-  //TODO tooltip não redimenciona para a altura necessária, checar
+  //TODO textos expandem verticalmente, mas o container é exibido cortado a 1° vez, depois ele é exibido normal;
   private VBox container;
 
   public WRichTooltipSkin(WRichTooltip control) {
@@ -82,7 +79,6 @@ public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBas
   private void updateDescriptionSections(){
     HBox descriptionPane = new HBox();
     descriptionPane.setSpacing(10);
-    descriptionPane.setPrefHeight(0);
     
     ImageView descriptionImage = new ImageView(getSkinnable().getDescriptionImage());
     descriptionPane.getChildren().add(descriptionImage);
@@ -96,8 +92,12 @@ public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBas
         descriptionSectionsPanel.getChildren().add(label);
       });
     }
+    descriptionSectionsPanel.setMinHeight(Region.USE_PREF_SIZE);
+    descriptionSectionsPanel.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    descriptionSectionsPanel.setMaxHeight(Double.MAX_VALUE);
     descriptionPane.getChildren().add(descriptionSectionsPanel);
     
+//    VBox.setVgrow(descriptionPane, Priority.ALWAYS);
     container.getChildren().add(descriptionPane);
   }
   
@@ -120,7 +120,11 @@ public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBas
       });
       footerPane.getChildren().add(footerSectionsPanel);
     }
+    footerSectionsPanel.setMinHeight(Region.USE_PREF_SIZE);
+    footerSectionsPanel.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    footerSectionsPanel.setMaxHeight(Double.MAX_VALUE);
     
+//    VBox.setVgrow(footerPane, Priority.ALWAYS);
     container.getChildren().add(footerPane);
   }
 }
