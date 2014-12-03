@@ -3,9 +3,12 @@ package br.com.ceos.wribbon.testes;
 import br.com.ceos.wribbon.WRichTooltip;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 /**
  *
@@ -22,16 +25,32 @@ public class MainTest extends Application{
   public void start(Stage primaryStage) throws Exception {
     primaryStage.setTitle("Hello World!");
     
-    WRichTooltip control = new WRichTooltip("Adcionar um Cabeçalho");
-    control.setDescriptionImage(new Image("imagem.png"));
-    control.addDescriptionSections("Os cabeçalhos o ajudam a repetir conteúdo na parte superior de cada página.");
-    control.addDescriptionSections("Eles são úteis para apresentar informações, como título, autor e número de página");
-    control.setFooterImage(new Image("question.png"));
-    control.addFooterSections("Dê-me mais informações");
+    //TODO extrair comportamento do tooltip para outro lugar
+    Popup p = new Popup();
+    WRichTooltip tip = new WRichTooltip("Adcionar um Cabeçalho");
+//    tip.setDescriptionImage(new Image("imagem.png"));
+    tip.addDescriptionSections("Os cabeçalhos o ajudam a repetir conteúdo na parte superior de cada página.");
+//    tip.addDescriptionSections("Eles são úteis para apresentar informações, como título, autor e número de página");
+//    tip.addDescriptionSections("Os cabeçalhos o ajudam a repetir conteúdo na parte superior de cada página.");
+//    tip.addDescriptionSections("Eles são úteis para apresentar informações, como título, autor e número de página");
+//    tip.setFooterImage(new Image("question.png"));
+//    tip.addFooterSections("Dê-me mais informações");
+//    tip.addFooterSections("Dê-me mais informações");
+    p.getContent().add(tip);
+    p.sizeToScene();
+    
+    Button button = new Button("Teste WRichTooltip");
+    button.setOnMouseEntered(event -> {
+      p.show(button, button.getLayoutX(), button.getLayoutY() + button.getHeight() + 30);
+    });
+    button.setOnMouseExited(event -> {
+      p.hide();
+    });
     
     StackPane root = new StackPane();
-    root.getChildren().add(control);
-    primaryStage.setScene(new Scene(root, 300, 250));
+    root.getChildren().add(button);
+    primaryStage.setScene(new Scene(root));
+    primaryStage.setMaximized(true);
     primaryStage.show();
   }
 }

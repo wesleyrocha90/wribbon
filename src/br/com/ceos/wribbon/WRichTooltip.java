@@ -1,12 +1,15 @@
 package br.com.ceos.wribbon;
 
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Control;
+import javafx.scene.control.PopupControl;
 import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 
@@ -21,6 +24,9 @@ public class WRichTooltip extends Control{
   private ObservableList<String> descriptionSections;
   private ObjectProperty<Image> footerImage;
   private ObservableList<String> footerSections;
+  
+  private BooleanProperty hasDescriptionImage = new SimpleBooleanProperty(this, "hasDescriptionImage", false);
+  private BooleanProperty hasFooterSections = new SimpleBooleanProperty(this, "hasFooterSections", false);
   
   public WRichTooltip(String title){
     titleProperty().set(title);
@@ -54,6 +60,7 @@ public class WRichTooltip extends Control{
   }
   
   public final void setDescriptionImage(Image descriptionImage){
+    hasDescriptionImage.set(true);
     descriptionImageProperty().set(descriptionImage);
   }
   
@@ -80,6 +87,7 @@ public class WRichTooltip extends Control{
   }
   
   public final void setFooterImage(Image footerImage){
+    hasFooterSections.set(true);
     footerImageProperty().set(footerImage);
   }
   
@@ -93,7 +101,16 @@ public class WRichTooltip extends Control{
   }
   
   public final void addFooterSections(String footerSection){
+    hasFooterSections.set(true);
     footerSectionsProperty().add(footerSection);
+  }
+  
+  public final boolean hasDescriptionImage(){
+    return hasDescriptionImage.get();
+  }
+  
+  public final boolean hasFooterSections(){
+    return hasFooterSections.get();
   }
   
   @Override
