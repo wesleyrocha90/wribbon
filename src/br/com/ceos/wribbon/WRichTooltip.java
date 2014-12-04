@@ -14,105 +14,142 @@ import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 
 /**
+ * <p>
+ * Componente usado para exibir informações adcionais sobre outro componente específico do Ribbon.
+ * <p>
+ * O WRichTooltip é capaz de exibir diferentes tipos de informação utilizando o seguinte formato de
+ * exibição
+ * <pre>
+ * +--------------------------------+
+ * | Título                         |
+ * | ********  Primeira linha da    |
+ * | *imagem*  seção de descrição   |
+ * | ********                       |
+ * |           Segunda linha da     |
+ * |           seção de descrição   |
+ * |--------------------------------|
+ * | ********  Primeira linha da    |
+ * | *imagem*  seção de rodapé      |
+ * | ********                       |
+ * |           Segunda linha da     |
+ * |           seção de rodapé      |
+ * +--------------------------------+
+ * </pre>
  *
  * @author Wesley
  * @since 29 de Novembro de 2014
  */
-public class WRichTooltip extends Control{
-  private StringProperty title;
-  private ObjectProperty<Image> descriptionImage;
-  private ObservableList<String> descriptionSections;
-  private ObjectProperty<Image> footerImage;
-  private ObservableList<String> footerSections;
-  
-  private BooleanProperty hasDescriptionImage = new SimpleBooleanProperty(this, "hasDescriptionImage", false);
-  private BooleanProperty hasFooterSections = new SimpleBooleanProperty(this, "hasFooterSections", false);
-  
-  public WRichTooltip(String title){
-    titleProperty().set(title);
+public class WRichTooltip extends Control {
+
+  private StringProperty titulo;
+  private ObjectProperty<Image> imagemDescricao;
+  private ObservableList<String> secoesDescricao;
+  private ObjectProperty<Image> imagemRodape;
+  private ObservableList<String> secoesRodape;
+
+  private BooleanProperty temTitulo = new SimpleBooleanProperty(this, "temTitulo", false);
+  private BooleanProperty temDescricao = new SimpleBooleanProperty(this, "temDescricao", false);
+  private BooleanProperty temRodape = new SimpleBooleanProperty(this, "temRodape", false);
+
+  public WRichTooltip() {
+
   }
-  
-  public WRichTooltip(String title, String descriptionSection){
-    titleProperty().set(title);
-    descriptionSectionsProperty().add(descriptionSection);
+
+  public WRichTooltip(String titulo) {
+    tituloProperty().set(titulo);
   }
-  
-  public final StringProperty titleProperty(){
-    if(title == null) title = new SimpleStringProperty(this, "title", "");
-    return title;
+
+  public WRichTooltip(String titulo, String... secoesDescricao) {
+    tituloProperty().set(titulo);
+    secoesDescricaoProperty().addAll(secoesDescricao);
   }
-  
-  public final String getTitle(){
-    return titleProperty().get();
+
+  public final StringProperty tituloProperty() {
+    if (titulo == null) {
+      titulo = new SimpleStringProperty(this, "titulo", "");
+    }
+    return titulo;
   }
-  
-  public final void setTitle(String title){
-    titleProperty().set(title);
+
+  public final String getTitulo() {
+    return tituloProperty().get();
   }
-  
-  public final ObjectProperty<Image> descriptionImageProperty(){
-    if(descriptionImage == null) descriptionImage = new SimpleObjectProperty<>();
-    return descriptionImage;
+
+  public final void setTitulo(String titulo) {
+    tituloProperty().set(titulo);
   }
-  
-  public final Image getDescriptionImage(){
-    return descriptionImageProperty().get();
+
+  public final ObjectProperty<Image> imagemDescricaoProperty() {
+    if (imagemDescricao == null) {
+      imagemDescricao = new SimpleObjectProperty<>();
+    }
+    return imagemDescricao;
   }
-  
-  public final void setDescriptionImage(Image descriptionImage){
-    hasDescriptionImage.set(true);
-    descriptionImageProperty().set(descriptionImage);
+
+  public final Image getImagemDescricao() {
+    return imagemDescricaoProperty().get();
   }
-  
-  public final ObservableList<String> descriptionSectionsProperty(){
-    if(descriptionSections == null) descriptionSections = FXCollections.<String>observableArrayList();
-    return descriptionSections;
+
+  public final void setImagemDescricao(Image imagemDescricao) {
+    temDescricao.set(true);
+    imagemDescricaoProperty().set(imagemDescricao);
   }
-  
-  public final ObservableList getDescriptionSections(){
-    return descriptionSections;
+
+  public final ObservableList<String> secoesDescricaoProperty() {
+    if (secoesDescricao == null) {
+      secoesDescricao = FXCollections.<String>observableArrayList();
+    }
+    return secoesDescricao;
   }
-  
-  public final void addDescriptionSections(String descriptionSection){
-    descriptionSectionsProperty().add(descriptionSection);
+
+  public final ObservableList getSecoesDescricao() {
+    return secoesDescricao;
   }
-  
-  public final ObjectProperty<Image> footerImageProperty(){
-    if(footerImage == null) footerImage = new SimpleObjectProperty<>();
-    return footerImage;
+
+  public final void addSecaoDescricao(String secaoDescricao) {
+    secoesDescricaoProperty().add(secaoDescricao);
   }
-  
-  public final Image getFooterImage(){
-    return footerImageProperty().get();
+
+  public final ObjectProperty<Image> imagemRodapeProperty() {
+    if (imagemRodape == null) {
+      imagemRodape = new SimpleObjectProperty<>();
+    }
+    return imagemRodape;
   }
-  
-  public final void setFooterImage(Image footerImage){
-    hasFooterSections.set(true);
-    footerImageProperty().set(footerImage);
+
+  public final Image getImagemRodape() {
+    return imagemRodapeProperty().get();
   }
-  
-  public final ObservableList<String> footerSectionsProperty(){
-    if(footerSections == null) footerSections = FXCollections.<String>observableArrayList();
-    return footerSections;
+
+  public final void setImagemRodape(Image imagemRodape) {
+    temRodape.set(true);
+    imagemRodapeProperty().set(imagemRodape);
   }
-  
-  public final ObservableList getFooterSections(){
-    return footerSections;
+
+  public final ObservableList<String> secoesRodapeProperty() {
+    if (secoesRodape == null) {
+      secoesRodape = FXCollections.<String>observableArrayList();
+    }
+    return secoesRodape;
   }
-  
-  public final void addFooterSections(String footerSection){
-    hasFooterSections.set(true);
-    footerSectionsProperty().add(footerSection);
+
+  public final ObservableList getSecoesRodape() {
+    return secoesRodape;
   }
-  
-  public final boolean hasDescriptionImage(){
-    return hasDescriptionImage.get();
+
+  public final void addSecaoRodape(String secaoRodape) {
+    temRodape.set(true);
+    secoesRodapeProperty().add(secaoRodape);
   }
-  
-  public final boolean hasFooterSections(){
-    return hasFooterSections.get();
+
+  public final boolean temImagemDescricao() {
+    return temDescricao.get();
   }
-  
+
+  public final boolean temRodape() {
+    return temRodape.get();
+  }
+
   @Override
   protected Skin<?> createDefaultSkin() {
     return new WRichTooltipSkin(this);

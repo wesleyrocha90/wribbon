@@ -30,61 +30,65 @@ import javafx.scene.text.FontWeight;
  * @since 01 de Dezembro de 2014
  */
 public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBase<WRichTooltip>> {
-  
-  //TODO textos expandem verticalmente, mas o container é exibido cortado a 1° vez, depois ele é exibido normal;
+
   private VBox container;
 
   public WRichTooltipSkin(WRichTooltip control) {
     super(control, new BehaviorBase<>(control, Collections.<KeyBinding>emptyList()));
-    updateRichTooltip();
+
+    container = new VBox();
+
     getChildren().add(container);
+
+    updateRichTooltip();
   }
 
   private void updateRichTooltip() {
-    container = new VBox();
+    container.getChildren().clear();
+
     container.setFillWidth(true);
     container.setPadding(new Insets(10));
     container.setSpacing(5);
     container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
-    if(getSkinnable().hasDescriptionImage()){
+
+    if (getSkinnable().temImagemDescricao()) {
       container.setPrefWidth(300);
       container.setMaxWidth(300);
       container.setMinWidth(300);
-    }else if(getSkinnable().hasFooterSections()){
+    } else if (getSkinnable().temRodape()) {
       container.setPrefWidth(240);
       container.setMaxWidth(240);
       container.setMinWidth(240);
-    }else{
+    } else {
       container.setPrefWidth(180);
       container.setMaxWidth(180);
       container.setMinWidth(180);
     }
-    
+
     updateTitle();
     updateDescriptionSections();
-    if(getSkinnable().hasFooterSections()){
+    if (getSkinnable().temRodape()) {
       container.getChildren().add(new Separator(Orientation.HORIZONTAL));
       updateFooterSections();
     }
   }
-  
-  private void updateTitle(){
-    Label labelTitle = new Label(getSkinnable().getTitle());
+
+  private void updateTitle() {
+    Label labelTitle = new Label(getSkinnable().getTitulo());
     labelTitle.setFont(Font.font("System", FontWeight.BOLD, 12));
     container.getChildren().add(labelTitle);
   }
-  
-  private void updateDescriptionSections(){
+
+  private void updateDescriptionSections() {
     HBox descriptionPane = new HBox();
     descriptionPane.setSpacing(10);
-    
-    ImageView descriptionImage = new ImageView(getSkinnable().getDescriptionImage());
+
+    ImageView descriptionImage = new ImageView(getSkinnable().getImagemDescricao());
     descriptionPane.getChildren().add(descriptionImage);
 
     VBox descriptionSectionsPanel = new VBox(10);
-    ObservableList<String> descriptionSections = getSkinnable().getDescriptionSections();
+    ObservableList<String> descriptionSections = getSkinnable().getSecoesDescricao();
     if (descriptionSections != null && descriptionSections.size() > 0) {
       descriptionSections.forEach((string) -> {
         Label label = new Label(string);
@@ -96,20 +100,20 @@ public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBas
     descriptionSectionsPanel.setPrefHeight(Region.USE_COMPUTED_SIZE);
     descriptionSectionsPanel.setMaxHeight(Double.MAX_VALUE);
     descriptionPane.getChildren().add(descriptionSectionsPanel);
-    
+
 //    VBox.setVgrow(descriptionPane, Priority.ALWAYS);
     container.getChildren().add(descriptionPane);
   }
-  
-  private void updateFooterSections(){
+
+  private void updateFooterSections() {
     HBox footerPane = new HBox();
     footerPane.setSpacing(10);
-    
-    ImageView footerImage = new ImageView(getSkinnable().getFooterImage());
+
+    ImageView footerImage = new ImageView(getSkinnable().getImagemRodape());
     footerPane.getChildren().add(footerImage);
-    
+
     VBox footerSectionsPanel = new VBox(10);
-    ObservableList<String> footerSections = getSkinnable().getFooterSections();
+    ObservableList<String> footerSections = getSkinnable().getSecoesRodape();
     if (footerSections != null && footerSections.size() > 0) {
       footerSections.forEach((string) -> {
         Label label = new Label(string);
@@ -123,7 +127,7 @@ public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBas
     footerSectionsPanel.setMinHeight(Region.USE_PREF_SIZE);
     footerSectionsPanel.setPrefHeight(Region.USE_COMPUTED_SIZE);
     footerSectionsPanel.setMaxHeight(Double.MAX_VALUE);
-    
+
 //    VBox.setVgrow(footerPane, Priority.ALWAYS);
     container.getChildren().add(footerPane);
   }
