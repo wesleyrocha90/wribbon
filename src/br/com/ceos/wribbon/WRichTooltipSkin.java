@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -25,25 +26,23 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- *
+ * O Skin para o {@link WRichTooltip}
+ * 
  * @author Wesley
  * @since 01 de Dezembro de 2014
  */
 public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBase<WRichTooltip>> {
 
-  private VBox container;
+  private final VBox container;
 
   public WRichTooltipSkin(WRichTooltip control) {
     super(control, new BehaviorBase<>(control, Collections.<KeyBinding>emptyList()));
-
     container = new VBox();
-
     getChildren().add(container);
-
-    updateRichTooltip();
+    updateWRichTooltip();
   }
 
-  private void updateRichTooltip() {
+  private void updateWRichTooltip() {
     container.getChildren().clear();
 
     container.setFillWidth(true);
@@ -52,11 +51,17 @@ public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBas
     container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
 
-    if (getSkinnable().temImagemDescricao()) {
-      container.setPrefWidth(300);
-      container.setMaxWidth(300);
-      container.setMinWidth(300);
-    } else if (getSkinnable().temRodape()) {
+    if (getSkinnable().imagemDescricaoProperty().get() != null) {
+      if (getSkinnable().imagemDescricaoProperty().get().getWidth() <= 100) {
+        container.setPrefWidth(300);
+        container.setMaxWidth(300);
+        container.setMinWidth(300);
+      } else {
+        container.setPrefWidth(300 + getSkinnable().imagemDescricaoProperty().get().getWidth());
+        container.setMaxWidth(300 + getSkinnable().imagemDescricaoProperty().get().getWidth());
+        container.setMinWidth(300 + getSkinnable().imagemDescricaoProperty().get().getWidth());
+      }
+    } else if (getSkinnable().imagemRodapeProperty().get() != null || getSkinnable().getSecoesRodape().size() > 0) {
       container.setPrefWidth(240);
       container.setMaxWidth(240);
       container.setMinWidth(240);
@@ -65,70 +70,81 @@ public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBas
       container.setMaxWidth(180);
       container.setMinWidth(180);
     }
+    
+    container.setMinHeight(Region.USE_PREF_SIZE);
+    container.setPrefHeight(Region.USE_COMPUTED_SIZE);
+    container.setMaxHeight(Double.MAX_VALUE);
 
-    updateTitle();
-    updateDescriptionSections();
-    if (getSkinnable().temRodape()) {
+    if (getSkinnable().tituloProperty().get() != null) {
+      updateTitulo();
+    }
+    if (getSkinnable().imagemDescricaoProperty().get() != null || getSkinnable().getSecoesDescricao().size() > 0) {
+      updateDescricao();
+    }
+    if (getSkinnable().imagemRodapeProperty().get() != null || getSkinnable().getSecoesRodape().size() > 0) {
       container.getChildren().add(new Separator(Orientation.HORIZONTAL));
-      updateFooterSections();
+      updateRodape();
     }
   }
 
-  private void updateTitle() {
-    Label labelTitle = new Label(getSkinnable().getTitulo());
-    labelTitle.setFont(Font.font("System", FontWeight.BOLD, 12));
-    container.getChildren().add(labelTitle);
+  private void updateTitulo() {
+    Label labelTitulo = new Label(getSkinnable().getTitulo());
+    labelTitulo.setFont(Font.font("System", FontWeight.BOLD, 12));
+    labelTitulo.setWrapText(true);
+    container.getChildren().add(labelTitulo);
   }
 
-  private void updateDescriptionSections() {
-    HBox descriptionPane = new HBox();
-    descriptionPane.setSpacing(10);
+  private void updateDescricao() {
+    HBox painel = new HBox();
+    painel.setSpacing(10);
 
-    ImageView descriptionImage = new ImageView(getSkinnable().getImagemDescricao());
-    descriptionPane.getChildren().add(descriptionImage);
+    Image imagem = getSkinnable().imagemDescricaoProperty().get();
+    if (imagem != null) {
+      painel.getChildren().add(new ImageView(imagem));
+    }
 
-    VBox descriptionSectionsPanel = new VBox(10);
-    ObservableList<String> descriptionSections = getSkinnable().getSecoesDescricao();
-    if (descriptionSections != null && descriptionSections.size() > 0) {
-      descriptionSections.forEach((string) -> {
-        Label label = new Label(string);
-        label.setWrapText(true);
-        descriptionSectionsPanel.getChildren().add(label);
+    ObservableList<String> secoesDescricao = getSkinnable().getSecoesDescricao();
+    if (secoesDescricao != null && secoesDescricao.size() > 0) {
+      VBox painelSecoes = new VBox(10);
+      secoesDescricao.forEach((string) -> {
+        Label labelSecao = new Label(string);
+        labelSecao.setWrapText(true);
+        painelSecoes.getChildren().add(labelSecao);
       });
+      painelSecoes.setMinHeight(Region.USE_PREF_SIZE);
+      painelSecoes.setPrefHeight(Region.USE_COMPUTED_SIZE);
+      painelSecoes.setMaxHeight(Double.MAX_VALUE);
+      painel.getChildren().add(painelSecoes);
     }
-    descriptionSectionsPanel.setMinHeight(Region.USE_PREF_SIZE);
-    descriptionSectionsPanel.setPrefHeight(Region.USE_COMPUTED_SIZE);
-    descriptionSectionsPanel.setMaxHeight(Double.MAX_VALUE);
-    descriptionPane.getChildren().add(descriptionSectionsPanel);
 
-//    VBox.setVgrow(descriptionPane, Priority.ALWAYS);
-    container.getChildren().add(descriptionPane);
+    container.getChildren().add(painel);
   }
 
-  private void updateFooterSections() {
-    HBox footerPane = new HBox();
-    footerPane.setSpacing(10);
+  private void updateRodape() {
+    HBox painel = new HBox();
+    painel.setSpacing(10);
 
-    ImageView footerImage = new ImageView(getSkinnable().getImagemRodape());
-    footerPane.getChildren().add(footerImage);
-
-    VBox footerSectionsPanel = new VBox(10);
-    ObservableList<String> footerSections = getSkinnable().getSecoesRodape();
-    if (footerSections != null && footerSections.size() > 0) {
-      footerSections.forEach((string) -> {
-        Label label = new Label(string);
-        label.setFont(Font.font("System", FontWeight.BOLD, 12));
-        label.setTextFill(Color.BLUE);
-        label.setWrapText(true);
-        footerSectionsPanel.getChildren().add(label);
-      });
-      footerPane.getChildren().add(footerSectionsPanel);
+    Image imagem = getSkinnable().imagemRodapeProperty().get();
+    if (imagem != null) {
+      painel.getChildren().add(new ImageView(imagem));
     }
-    footerSectionsPanel.setMinHeight(Region.USE_PREF_SIZE);
-    footerSectionsPanel.setPrefHeight(Region.USE_COMPUTED_SIZE);
-    footerSectionsPanel.setMaxHeight(Double.MAX_VALUE);
 
-//    VBox.setVgrow(footerPane, Priority.ALWAYS);
-    container.getChildren().add(footerPane);
+    ObservableList<String> secoesRodape = getSkinnable().getSecoesRodape();
+    if (secoesRodape != null && secoesRodape.size() > 0) {
+      VBox painelSecoes = new VBox(10);
+      secoesRodape.forEach((string) -> {
+        Label labelSecao = new Label(string);
+        labelSecao.setFont(Font.font("System", FontWeight.BOLD, 12));
+        labelSecao.setTextFill(Color.BLUE);
+        labelSecao.setWrapText(true);
+        painelSecoes.getChildren().add(labelSecao);
+      });
+      painelSecoes.setMinHeight(Region.USE_PREF_SIZE);
+      painelSecoes.setPrefHeight(Region.USE_COMPUTED_SIZE);
+      painelSecoes.setMaxHeight(Double.MAX_VALUE);
+      painel.getChildren().add(painelSecoes);
+    }
+
+    container.getChildren().add(painel);
   }
 }

@@ -1,72 +1,96 @@
 package br.com.ceos.wribbon;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Control;
-import javafx.scene.control.PopupControl;
 import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
 
 /**
- * <p>
- * Componente usado para exibir informações adcionais sobre outro componente específico do Ribbon.
- * <p>
- * O WRichTooltip é capaz de exibir diferentes tipos de informação utilizando o seguinte formato de
- * exibição
+ * <p>O Tooltip é um componente usado para exibir informações extras sobre o funcionamento de outros componentes.
+ * Normalmente seu funcionamento é ligado aos eventos do mouse, principalmente o hover.
+ * <p>O WRichTooltip é um tooltip capaz de exibir diferentes tipos de informação, apresentadas utilizando 
+ * o seguinte formato de exibição
  * <pre>
  * +--------------------------------+
  * | Título                         |
  * | ********  Primeira linha da    |
- * | *imagem*  seção de descrição   |
+ * | *Imagem*  seção de descrição   |
  * | ********                       |
  * |           Segunda linha da     |
  * |           seção de descrição   |
  * |--------------------------------|
  * | ********  Primeira linha da    |
- * | *imagem*  seção de rodapé      |
+ * | *Imagem*  seção de rodapé      |
  * | ********                       |
  * |           Segunda linha da     |
  * |           seção de rodapé      |
  * +--------------------------------+
  * </pre>
+ * <p>O exemplo acima mostra um WRichTooltip contendo todas os tipos de informações possíveis, mas ele pode ser mais
+ * simples, pode até não conter informação alguma, sendo apresentado como um retângulo vazio, mas isso é inútil.
  *
  * @author Wesley
  * @since 29 de Novembro de 2014
  */
 public class WRichTooltip extends Control {
-
+  
+  /**
+   * O titulo deste tooltip, apresentado destacado
+   */
   private StringProperty titulo;
+  
+  /**
+   * A imagem apresentada como item da descrição
+   */
   private ObjectProperty<Image> imagemDescricao;
+  
+  /**
+   * Todas as seções de texto que pertencem a descrição
+   */
   private ObservableList<String> secoesDescricao;
+  
+  /**
+   * A imagem apresentada como item do rodapé
+   */
   private ObjectProperty<Image> imagemRodape;
+  
+  /**
+   * Todas as seções de texto que pertencem ao rodapé
+   */
   private ObservableList<String> secoesRodape;
-
-  private BooleanProperty temTitulo = new SimpleBooleanProperty(this, "temTitulo", false);
-  private BooleanProperty temDescricao = new SimpleBooleanProperty(this, "temDescricao", false);
-  private BooleanProperty temRodape = new SimpleBooleanProperty(this, "temRodape", false);
-
+  
+  /**
+   * Cria um tooltip vazio, sem nenhum elemento
+   */
   public WRichTooltip() {
-
   }
 
+  /**
+   * Cria um tooltip com o título informado
+   * @param titulo - O título do tooltip
+   */
   public WRichTooltip(String titulo) {
     tituloProperty().set(titulo);
   }
 
+  /**
+   * Cria um tooltip com o título e com as seções de descrição informadas
+   * @param titulo - O título do tooltip
+   * @param secoesDescricao - Todos os textos que farão parte da descrição
+   */
   public WRichTooltip(String titulo, String... secoesDescricao) {
     tituloProperty().set(titulo);
     secoesDescricaoProperty().addAll(secoesDescricao);
   }
-
+  
   public final StringProperty tituloProperty() {
     if (titulo == null) {
-      titulo = new SimpleStringProperty(this, "titulo", "");
+      titulo = new SimpleStringProperty(this, "titulo");
     }
     return titulo;
   }
@@ -81,7 +105,7 @@ public class WRichTooltip extends Control {
 
   public final ObjectProperty<Image> imagemDescricaoProperty() {
     if (imagemDescricao == null) {
-      imagemDescricao = new SimpleObjectProperty<>();
+      imagemDescricao = new SimpleObjectProperty<>(this, "imagemDescricao");
     }
     return imagemDescricao;
   }
@@ -91,7 +115,6 @@ public class WRichTooltip extends Control {
   }
 
   public final void setImagemDescricao(Image imagemDescricao) {
-    temDescricao.set(true);
     imagemDescricaoProperty().set(imagemDescricao);
   }
 
@@ -103,7 +126,7 @@ public class WRichTooltip extends Control {
   }
 
   public final ObservableList getSecoesDescricao() {
-    return secoesDescricao;
+    return secoesDescricaoProperty();
   }
 
   public final void addSecaoDescricao(String secaoDescricao) {
@@ -112,7 +135,7 @@ public class WRichTooltip extends Control {
 
   public final ObjectProperty<Image> imagemRodapeProperty() {
     if (imagemRodape == null) {
-      imagemRodape = new SimpleObjectProperty<>();
+      imagemRodape = new SimpleObjectProperty<>(this, "imagemRodape");
     }
     return imagemRodape;
   }
@@ -122,7 +145,6 @@ public class WRichTooltip extends Control {
   }
 
   public final void setImagemRodape(Image imagemRodape) {
-    temRodape.set(true);
     imagemRodapeProperty().set(imagemRodape);
   }
 
@@ -134,20 +156,11 @@ public class WRichTooltip extends Control {
   }
 
   public final ObservableList getSecoesRodape() {
-    return secoesRodape;
+    return secoesRodapeProperty();
   }
 
   public final void addSecaoRodape(String secaoRodape) {
-    temRodape.set(true);
     secoesRodapeProperty().add(secaoRodape);
-  }
-
-  public final boolean temImagemDescricao() {
-    return temDescricao.get();
-  }
-
-  public final boolean temRodape() {
-    return temRodape.get();
   }
 
   @Override
