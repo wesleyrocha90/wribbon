@@ -1,5 +1,6 @@
-package br.com.ceos.wribbon;
+package br.com.ceos.ribbon.componet.skin;
 
+import br.com.ceos.ribbon.componet.WRichTooltip;
 import com.sun.javafx.scene.control.behavior.BehaviorBase;
 import com.sun.javafx.scene.control.behavior.KeyBinding;
 import com.sun.javafx.scene.control.skin.BehaviorSkinBase;
@@ -26,7 +27,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 /**
- * O Skin para o {@link WRichTooltip}
+ * O Skin para o {@link WRichTooltip}.
  * 
  * @author Wesley
  * @since 01 de Dezembro de 2014

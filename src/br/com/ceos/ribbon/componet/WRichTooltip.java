@@ -1,5 +1,6 @@
-package br.com.ceos.wribbon;
+package br.com.ceos.ribbon.componet;
 
+import br.com.ceos.ribbon.componet.skin.WRichTooltipSkin;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -14,7 +15,7 @@ import javafx.scene.image.Image;
  * <p>O Tooltip é um componente usado para exibir informações extras sobre o funcionamento de outros componentes.
  * Normalmente seu funcionamento é ligado aos eventos do mouse, principalmente o hover.
  * <p>O WRichTooltip é um tooltip capaz de exibir diferentes tipos de informação, apresentadas utilizando 
- * o seguinte formato de exibição
+ * o seguinte formato de exibição.
  * <pre>
  * +--------------------------------+
  * | Título                         |
