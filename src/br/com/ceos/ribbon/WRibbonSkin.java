@@ -1,4 +1,4 @@
-package br.com.ceos.ribbon.skin;
+package br.com.ceos.ribbon;
 
 /**
  * 

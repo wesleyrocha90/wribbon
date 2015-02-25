@@ -1,8 +1,6 @@
 package br.com.ceos.ribbon;
 
-import br.com.ceos.ribbon.componet.WApplicationButton;
-import br.com.ceos.ribbon.tab.WContextualTabGroup;
-import br.com.ceos.ribbon.tab.WTab;
+import br.com.ceos.ribbon.container.WTab;
 import javafx.collections.ObservableList;
 
 /**
@@ -12,9 +10,9 @@ import javafx.collections.ObservableList;
  */
 public class WRibbon {
   
-  private WApplicationButton botaoAplicacao;
+  //private WApplicationButton botaoAplicacao;
   private ObservableList<WTab> tabs;
-  private ObservableList<WContextualTabGroup> contextualTabGrupos;
+  //private ObservableList<WContextualTabGroup> contextualTabGrupos;
   // quickBar - a barra de acesso rápido
   // helpBar - a barra de ajuda
   

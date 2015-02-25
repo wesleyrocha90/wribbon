@@ -6,7 +6,7 @@ package br.com.ceos.ribbon.componet.enumeration;
  * @author Wesley
  * @since 06 de Dezembro de 2014
  */
-public enum WCommandButtonDisplayState {
+public enum WButtonDisplayState {
   
   /**
    * Botão exibido em formato grande
