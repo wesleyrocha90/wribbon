@@ -2,9 +2,11 @@ package br.com.ceos.ribbon.componet;
 
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -15,16 +17,19 @@ import javafx.scene.shape.Rectangle;
  * @since February 20th 2015
  */
 public class WButtonSkin extends SkinBase<WButton>{
-  private final double iconContainerHeight = 120; // 40
-  private final double textContainerHeight = 90; // 30
-  private final double width = 120; // 40
+  private final double iconContainerHeight = 40;
+  private final double textContainerHeight = 30;
+  private final double width = 40;
+  private final double iconSize = 36;
   private final Color background = Color.WHITE;
   private final Color backgroundHover = Color.AQUA;
   private final Color backgroundArmed = Color.LIGHTBLUE;
   
   private VBox container;
-  private Rectangle textContainer;
-  private Rectangle iconContainer;
+  private StackPane textContainer;
+  private StackPane iconContainer;
+  private Rectangle textRectangle;
+  private Rectangle iconRectangle;
   
   public WButtonSkin(WButton control){
     super(control);
@@ -46,21 +51,27 @@ public class WButtonSkin extends SkinBase<WButton>{
   }
   
   private void updateIconContainer(){
-    iconContainer = new Rectangle(width, iconContainerHeight);
-    iconContainer.setFill(background);
-    iconContainer.addEventHandler(MouseEvent.MOUSE_ENTERED, (event) -> iconContainer.setFill(backgroundHover));
-    iconContainer.addEventHandler(MouseEvent.MOUSE_EXITED, (event) -> iconContainer.setFill(background));
-    iconContainer.addEventHandler(MouseEvent.MOUSE_PRESSED, (event) -> iconContainer.setFill(backgroundArmed));
-    iconContainer.addEventHandler(MouseEvent.MOUSE_RELEASED, (event) -> iconContainer.setFill(background));
+    iconRectangle = new Rectangle(width, iconContainerHeight);
+    iconRectangle.setFill(background);
+    
+    ImageView iconView = new ImageView(getSkinnable().getIcon());
+    iconView.setFitHeight(iconSize);
+    iconView.setFitWidth(iconSize);
+    iconView.setPreserveRatio(true);
+    iconView.setSmooth(true);
+    iconView.setMouseTransparent(true);
+    
+    iconContainer = new StackPane(iconRectangle, iconView);
   }
   
   private void updateTextContainer(){
-    textContainer = new Rectangle(width, textContainerHeight);
-    textContainer.setFill(background);
-    textContainer.addEventHandler(MouseEvent.MOUSE_ENTERED, (event) -> textContainer.setFill(backgroundHover));
-    textContainer.addEventHandler(MouseEvent.MOUSE_EXITED, (event) -> textContainer.setFill(background));
-    textContainer.addEventHandler(MouseEvent.MOUSE_PRESSED, (event) -> textContainer.setFill(backgroundArmed));
-    textContainer.addEventHandler(MouseEvent.MOUSE_RELEASED, (event) -> textContainer.setFill(background));
+    textRectangle = new Rectangle(width, textContainerHeight);
+    textRectangle.setFill(background);
+    
+    Label label = new Label(getSkinnable().getText());
+    label.setMouseTransparent(true);
+    
+    textContainer = new StackPane(textRectangle, label);
   }
 
   @Override
@@ -71,7 +82,7 @@ public class WButtonSkin extends SkinBase<WButton>{
   
   @Override
   protected double computePrefHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
-    return leftInset + iconContainerHeight + textContainerHeight + rightInset;
+    return topInset + iconContainerHeight + textContainerHeight + bottomInset;
   }
 
   @Override

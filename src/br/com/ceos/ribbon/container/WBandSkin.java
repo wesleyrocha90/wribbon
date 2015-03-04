@@ -1,14 +1,12 @@
 package br.com.ceos.ribbon.container;
 
 import javafx.geometry.HPos;
-import javafx.geometry.Insets;
 import javafx.geometry.VPos;
-import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.SkinBase;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 
 /**
  *
@@ -16,50 +14,48 @@ import javafx.scene.paint.Color;
  * @since February 25th 2015
  */
 public class WBandSkin extends SkinBase<WBand>{
-
-  private final double prefHeight = 100;
-  private final double spacing = 2;
-  private final double topInset = 5;
-  private final double bottomInset = 5;
-  private final double leftInset = 5;
-  private final double rightInset = 5;
+  private final double titleContainerHeight = 30;
+  
+  private WBandPane bandPane = new WBandPane();
+  private BorderPane container;
   
   public WBandSkin(WBand control){
     super(control);
-//    setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, Insets.EMPTY)));
+    control.setMaxWidth(Region.USE_PREF_SIZE);
+    control.setMaxHeight(Region.USE_PREF_SIZE);
+    control.setMinWidth(Region.USE_PREF_SIZE);
+    control.setMinHeight(Region.USE_PREF_SIZE);
+    bandPane.getChildren().addAll(control.getButtons());
   }
   
-  protected void layoutChildren() {
-    double currentX = leftInset;
-    for(Node node : getChildren()){
-      double width = node.prefWidth(-1);
-      double height = node.prefHeight(-1);
-      layoutInArea(node, currentX, topInset, width, height, 0, HPos.CENTER, VPos.CENTER);
-      currentX += width + spacing; 
-    }
+  public void updateContainer(double width, double height){
+    container = new BorderPane();
+    
+    Label title = new Label(getSkinnable().getTitle());
+    StackPane titleContainer = new StackPane(title);
+    titleContainer.setMinHeight(titleContainerHeight);
+    titleContainer.setPrefHeight(titleContainerHeight);
+    titleContainer.setMaxHeight(titleContainerHeight);
+    
+    container.setCenter(bandPane);
+    container.setBottom(titleContainer);
   }
   
-  protected double computePrefHeight(double width) {
-    return topInset + prefHeight + bottomInset;
-  }
-
-  protected double computePrefWidth(double height) {
-    double width = 0;
-    for(Node node : getChildren()){
-      width += node.prefWidth(-1);
-    }
-    double cumulatedSpacing = 0;
-    if(getChildren().size() > 1){
-      cumulatedSpacing = (getChildren().size() - 1) * spacing;
-    }
-    return leftInset + width + cumulatedSpacing + rightInset;
+  @Override
+  protected void layoutChildren(double contentX, double contentY, double contentWidth, double contentHeight) {
+    updateContainer(contentWidth, contentHeight);
+    layoutInArea(container, contentX, contentY, contentWidth, contentHeight, -1, HPos.CENTER, VPos.CENTER);
   }
   
-  protected double computeMaxHeight(double width) { return computePrefHeight(width); }
+  @Override
+  protected double computePrefHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
+    return leftInset + bandPane.computePrefHeight(-1) + titleContainerHeight + rightInset;
+//    return leftInset + bandPane.getPrefHeight() + rightInset;
+  }
 
-  protected double computeMaxWidth(double height) { return computePrefWidth(height); }
-
-  protected double computeMinHeight(double width) { return computePrefHeight(width); }
-
-  protected double computeMinWidth(double height) { return computePrefWidth(height); }
+  @Override
+  protected double computePrefWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
+    return topInset + bandPane.computePrefWidth(-1) + bottomInset;
+//    return topInset + bandPane.getPrefWidth() + bottomInset;
+  }
 }
