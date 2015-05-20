@@ -20,27 +20,23 @@ import javafx.stage.Stage;
 
 public class MainTest extends Application {
 
+  @Override
+  public void start(Stage stage) throws Exception {
+    stage.setTitle("Ribbon!");
+    
+    WButton button1 = new WButton("Colar");
+    
+    HBox ribbon = new HBox(button1);
+    ribbon.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
+    
+    BorderPane root = new BorderPane(new AnchorPane());
+    root.setTop(ribbon);
+    Scene scene = new Scene(root, 400, 400);
+    stage.setScene(scene);
+    stage.show();
+  }
+  
   public static void main(String[] args) {
     Application.launch(args);
-  }
-
-  @Override
-  public void start(Stage primaryStage) throws Exception {
-    primaryStage.setTitle("Ribbon!");
-    
-    WButton button1 = new WButton("Colar", new Image("Paste_128.png"));
-    WButton button2 = new WButton("Copiar", new Image("Copy_128.png"));
-    WButton button3 = new WButton("Testando um texto grande", new Image("Copy_128.png"));
-//    WBand band = new WBand("Titulo", null);
-//    band.addButtons(button1, button2, button3);
-//    WBandPane band = new WBandPane();
-//    band.getChildren().addAll(button1, button2, button3);
-    
-    
-    HBox root = new HBox(button1, button2, button3);
-    Scene scene = new Scene(root);
-    primaryStage.setScene(scene);
-    primaryStage.setMaximized(true);
-    primaryStage.show();
   }
 }

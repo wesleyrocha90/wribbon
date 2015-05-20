@@ -1,5 +1,6 @@
 package br.com.ceos.ribbon.componet;
 
+import impl.br.com.ceos.ribbon.skin.WButtonSkin;
 import br.com.ceos.ribbon.componet.enumeration.WButtonDisplayState;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -18,7 +19,6 @@ public class WButton extends Control{
   
   private StringProperty text;
   private ObjectProperty<Image> icon;
-  private ObjectProperty<WButtonDisplayState> displayState;
   
   public WButton(String text){
     textProperty().set(text);
@@ -41,12 +41,6 @@ public class WButton extends Control{
   public final Image getIcon(){ return iconProperty().get(); }
   public final void setIcon(Image icon){ iconProperty().set(icon); }
   
-  public final ObjectProperty<WButtonDisplayState> displayStateProperty(){
-    return displayState != null ? displayState = new SimpleObjectProperty<>(displayState, "displayState", WButtonDisplayState.BIG) : displayState;
-  }
-  public final WButtonDisplayState getDisplayState(){ return displayStateProperty().get(); }
-  public final void setDisplayState(WButtonDisplayState displayState){ displayStateProperty().set(displayState); }
-  
   @Override
   protected Skin<?> createDefaultSkin() {
     return new WButtonSkin(this);
@@ -57,7 +51,6 @@ public class WButton extends Control{
     StringBuilder string = new StringBuilder();
     string.append("WButton [");
     string.append("text:").append(text);
-    string.append("buttonKind:").append(displayState.get().name());
     string.append("]");
     return string.toString();
   }
