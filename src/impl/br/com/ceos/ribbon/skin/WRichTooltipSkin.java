@@ -1,5 +1,6 @@
-package br.com.ceos.ribbon.componet;
+package impl.br.com.ceos.ribbon.skin;
 
+import br.com.ceos.ribbon.componet.WRichTooltip;
 import com.sun.javafx.scene.control.behavior.BehaviorBase;
 import com.sun.javafx.scene.control.behavior.KeyBinding;
 import com.sun.javafx.scene.control.skin.BehaviorSkinBase;

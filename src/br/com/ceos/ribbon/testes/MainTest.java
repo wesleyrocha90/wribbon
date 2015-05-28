@@ -1,36 +1,64 @@
 package br.com.ceos.ribbon.testes;
 
-import br.com.ceos.ribbon.componet.WButton;
+import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.componet.enumeration.WItemKind;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class MainTest extends Application {
 
+  private WRibbonItem item1, item2, item3;
+
+  private Node criaRibbon() {
+    HBox ribbon = new HBox(5);
+    ribbon.setPadding(new Insets(5));
+    ribbon.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
+
+    item1 = new WRibbonItem("Botão", new Image("Paste_32.png"), WItemKind.MEDIUM);
+//    item2 = new WRibbonItem("Outro botão", new Image("Paste_32.png"));
+//    item3 = new WRibbonItem("Botão com um texto meio grande", new Image("Paste_32.png"));
+
+    ribbon.getChildren().addAll(item1, item2, item3);
+    return ribbon;
+  }
+
+  private Node criaPainelCentral() {
+    Button botao = new Button("Troca texto do item1");
+    botao.setOnAction(event -> item1.setTexto("Texto trocado por um bem grande"));
+
+    Label label = new Label();
+    label.textProperty().bind(item1.textoProperty());
+
+    VBox tabRoot = new VBox(botao, label);
+    return new TabPane(new Tab("Cliente", tabRoot), new Tab("Vendas"));
+  }
+
   @Override
   public void start(Stage stage) throws Exception {
-    stage.setTitle("Ribbon!");
-    
-    WButton button1 = new WButton("Copiar e colar");
-    
-    HBox ribbon = new HBox(button1);
-    ribbon.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
-    
-    BorderPane root = new BorderPane(new AnchorPane());
-    root.setTop(ribbon);
-    Scene scene = new Scene(root, 400, 400);
+    BorderPane root = new BorderPane();
+    root.setTop(criaRibbon());
+    root.setCenter(criaPainelCentral());
+
+    Scene scene = new Scene(root, 400, 200);
     stage.setScene(scene);
     stage.show();
   }
-  
+
   public static void main(String[] args) {
     Application.launch(args);
   }

@@ -1,5 +1,6 @@
 package br.com.ceos.ribbon.componet;
 
+import impl.br.com.ceos.ribbon.skin.WRichTooltipSkin;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;

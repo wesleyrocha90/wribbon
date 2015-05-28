@@ -6,11 +6,15 @@ public class StringUtils {
     String[] strings = string.split(" ");
     String one = "";
     String two = "";
-    for(int i = 0; i < strings.length / 2; i++){
-      one += strings[i] + " ";
-    }
-    for(int i = strings.length / 2; i < strings.length; i++){
-      two += strings[i] + " ";
+    if(strings.length > 1){
+      for(int i = 0; i < strings.length / 2; i++){
+        one += strings[i].trim() + " ";
+      }
+      for(int i = strings.length / 2; i < strings.length; i++){
+        two += strings[i].trim() + " ";
+      }
+    }else{
+      one = strings[0];
     }
     return new String[]{one.trim(), two.trim()};
   }
