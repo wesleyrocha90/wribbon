@@ -30,8 +30,8 @@ public class MainTest extends Application {
     ribbon.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
 
     item1 = new WRibbonItem("Botão", new Image("Paste_32.png"), WItemKind.MEDIUM);
-//    item2 = new WRibbonItem("Outro botão", new Image("Paste_32.png"));
-//    item3 = new WRibbonItem("Botão com um texto meio grande", new Image("Paste_32.png"));
+    item2 = new WRibbonItem("Outro botão", new Image("Paste_32.png"), WItemKind.MEDIUM);
+    item3 = new WRibbonItem("Botão com um texto meio grande", new Image("Paste_32.png"), WItemKind.MEDIUM);
 
     ribbon.getChildren().addAll(item1, item2, item3);
     return ribbon;

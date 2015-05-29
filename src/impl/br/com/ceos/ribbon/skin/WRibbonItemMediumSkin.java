@@ -41,11 +41,12 @@ public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
     super(control);
     control.textoProperty().addListener((observable, oldValue, newValue) -> control.requestLayout());
     control.iconeProperty().addListener((observable, oldValue, newValue) -> control.requestLayout());
+    control.widthProperty().addListener((observable, oldValue, newValue) -> control.requestLayout());
     
     updateItem();
   }
 
-  private void updateItem() {
+  private void updateItem() {     
     if (container != null) {
       getChildren().remove(container);
     }
@@ -63,8 +64,8 @@ public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
 
   private void updateIconeContainer() {
     icone = new ImageView(getSkinnable().getIcone());
-    icone.setFitHeight(32);
-    icone.setFitWidth(32);
+    icone.setFitHeight(16);
+    icone.setFitWidth(16);
 
     iconeContainer = new StackPane(icone);
 //    iconeContainer.setBackground(new Background(new BackgroundFill(Color.rgb(0xDD, 0xDD, 0xDD), CornerRadii.EMPTY, Insets.EMPTY)));
@@ -94,5 +95,4 @@ public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
   protected double computePrefHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
     return topInset + PREF_HEIGHT + bottomInset;
   }
-  
 }

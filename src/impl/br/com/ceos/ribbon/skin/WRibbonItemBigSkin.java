@@ -45,7 +45,7 @@ public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
     updateItem();
   }
 
-  private void updateItem() {
+  private void updateItem() { 
     if (container != null) {
       getChildren().remove(container);
     }
