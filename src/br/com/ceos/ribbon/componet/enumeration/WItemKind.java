@@ -1,5 +1,8 @@
 package br.com.ceos.ribbon.componet.enumeration;
 
+import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.container.WRibbonBand;
+
 /**
  * Como os itens serão exibidos no Ribbon
  * 
@@ -9,22 +12,42 @@ package br.com.ceos.ribbon.componet.enumeration;
 public enum WItemKind {
   
   /**
-   * Item exibido em formato grande
+   * O {@link WRibbonItem Item} é exibido com uma altura que ocupa as três linhas do layout da 
+   * {@link WRibbonBand Banda}. Ele é exibido com o ícone na parte superior e o texto na inferior.
    */
-  BIG,
+  BIG(3),
+
+  /**
+   * O {@link WRibbonItem Item} é exibido com uma altura que ocupa duas linhas do layout da 
+   * {@link WRibbonBand Banda}. Ele é exibido com o ícone a esquerda e o texto a direita.
+   */
+  MEDIUM(2),
   
   /**
-   * Item exibido em formato tile, com título e descrição
+   * O {@link WRibbonItem Item} é exibido com uma altura que ocupa apenas uma linha do layout da 
+   * {@link WRibbonBand Banda}. Ele é exibido com o ícone a esquerda e o texto a direita.
    */
-  TILE,
+  SMALL(1),
   
   /**
-   * Item exibido em formato médio
+   * O {@link WRibbonItem Item} é exibido com uma altura que ocupa apenas uma linha do layout da 
+   * {@link WRibbonBand Banda}. Apenas o ícone é exibido neste caso.
    */
-  MEDIUM,
-  
+  ICON(1),
+    
   /**
-   * Item exibido em formato pequeno
+   * O {@link WRibbonItem Item} é exibido com uma altura fixa, essa exibição é usada apenas nos menus. 
+   * Uma descrição é exibida abaixo do Título do {@link WRibbonItem Item} neste caso.
    */
-  SMALL;
+  TILE(2);
+  
+  private final int peso;
+  
+  private WItemKind(int peso){
+    this.peso = peso;
+  }
+  
+  public int getPeso(){
+    return this.peso;
+  }
 }

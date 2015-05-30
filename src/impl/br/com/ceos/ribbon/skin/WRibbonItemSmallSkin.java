@@ -1,11 +1,9 @@
 package impl.br.com.ceos.ribbon.skin;
 
 import br.com.ceos.ribbon.componet.WRibbonItem;
-import br.com.ceos.ribbon.util.StringUtils;
-import javafx.beans.binding.Bindings;
+import br.com.ceos.ribbon.util.StyleUtils;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.control.SkinBase;
 import javafx.scene.image.ImageView;
@@ -16,8 +14,8 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -26,31 +24,30 @@ import javafx.scene.text.Text;
  * @author Wesley
  * @since May 28th 2015
  */
-public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
+public class WRibbonItemSmallSkin extends SkinBase<WRibbonItem> {
 
   private final double PREF_WIDTH = 50;
-  private final double PREF_HEIGHT = 94;
+  private final double PREF_HEIGHT = 25;
   
-  private VBox container;
+  private HBox container;
   private StackPane iconeContainer;
-  private VBox textoContainer;
   private ImageView icone;
-  private Text textoLinhaUm;
-  private Text textoLinhaDois;
+  private StackPane textoContainer;
+  private Text texto;
 
-  public WRibbonItemBigSkin(WRibbonItem control) {
+  public WRibbonItemSmallSkin(WRibbonItem control) {
     super(control);
     updateItem();
   }
 
-  private void updateItem() { 
+  private void updateItem() {     
     if (container != null) {
       getChildren().remove(container);
     }
     updateIconeContainer();
     updateTextoContainer();
 
-    container = new VBox(iconeContainer, textoContainer);
+    container = new HBox(iconeContainer, textoContainer);
     container.setSpacing(5);
     container.setPadding(new Insets(5));
     container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -62,28 +59,17 @@ public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
   private void updateIconeContainer() {
     icone = new ImageView();
     icone.imageProperty().bind(getSkinnable().iconeProperty());
-    icone.setFitHeight(32);
-    icone.setFitWidth(32);
+    icone.setFitHeight(16);
+    icone.setFitWidth(16);
 
     iconeContainer = new StackPane(icone);
-    iconeContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    iconeContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
   }
 
   private void updateTextoContainer() {
-    textoLinhaUm = new Text();
-    textoLinhaDois = new Text();
-    textoLinhaUm.textProperty().bind(Bindings.createStringBinding(
-        () -> StringUtils.splitInTwo(getSkinnable().textoProperty().get())[0], getSkinnable().textoProperty()));
-    textoLinhaDois.textProperty().bind(Bindings.createStringBinding(
-        () -> StringUtils.splitInTwo(getSkinnable().textoProperty().get())[1], getSkinnable().textoProperty()));
+    texto = new Text();
+    texto.textProperty().bind(getSkinnable().textoProperty());
     
-    textoContainer = new VBox(textoLinhaUm, textoLinhaDois);
-    textoContainer.setAlignment(Pos.TOP_CENTER);
-    textoContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    textoContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
+    textoContainer = new StackPane(texto);
   }
 
   @Override

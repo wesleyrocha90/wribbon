@@ -2,7 +2,9 @@ package br.com.ceos.ribbon.componet;
 
 import br.com.ceos.ribbon.componet.enumeration.WItemKind;
 import impl.br.com.ceos.ribbon.skin.WRibbonItemBigSkin;
+import impl.br.com.ceos.ribbon.skin.WRibbonItemIconSkin;
 import impl.br.com.ceos.ribbon.skin.WRibbonItemMediumSkin;
+import impl.br.com.ceos.ribbon.skin.WRibbonItemSmallSkin;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -76,6 +78,10 @@ public class WRibbonItem extends Control {
         return new WRibbonItemBigSkin(this);
       case MEDIUM:
         return new WRibbonItemMediumSkin(this);
+      case SMALL:
+        return new WRibbonItemSmallSkin(this);
+      case ICON:
+        return new WRibbonItemIconSkin(this);
     }
     return new WRibbonItemBigSkin(this);
   }

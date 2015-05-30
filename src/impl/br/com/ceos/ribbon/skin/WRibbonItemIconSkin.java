@@ -17,25 +17,22 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
 /**
  *
  * @author Wesley
- * @since May 29th 2015
+ * @since May 30th 2015
  */
-public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
+public class WRibbonItemIconSkin extends SkinBase<WRibbonItem> {
 
-  private final double PREF_WIDTH = 50;
-  private final double PREF_HEIGHT = 61;
+  private final double PREF_WIDTH = 25;
+  private final double PREF_HEIGHT = 25;
   
   private HBox container;
   private StackPane iconeContainer;
   private ImageView icone;
-  private StackPane textoContainer;
-  private Text texto;
 
-  public WRibbonItemMediumSkin(WRibbonItem control) {
+  public WRibbonItemIconSkin(WRibbonItem control) {
     super(control);
     updateItem();
   }
@@ -45,9 +42,8 @@ public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
       getChildren().remove(container);
     }
     updateIconeContainer();
-    updateTextoContainer();
 
-    container = new HBox(iconeContainer, textoContainer);
+    container = new HBox(iconeContainer);
     container.setSpacing(5);
     container.setPadding(new Insets(5));
     container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -59,23 +55,10 @@ public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
   private void updateIconeContainer() {
     icone = new ImageView();
     icone.imageProperty().bind(getSkinnable().iconeProperty());
-    icone.setFitHeight(32);
-    icone.setFitWidth(32);
+    icone.setFitHeight(16);
+    icone.setFitWidth(16);
 
     iconeContainer = new StackPane(icone);
-    iconeContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    iconeContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
-  }
-
-  private void updateTextoContainer() {
-    texto = new Text();
-    texto.textProperty().bind(getSkinnable().textoProperty());
-    
-    textoContainer = new StackPane(texto);
-    textoContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    textoContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
   }
 
   @Override
