@@ -1,7 +1,6 @@
 package impl.br.com.ceos.ribbon.skin;
 
 import br.com.ceos.ribbon.componet.WRibbonItem;
-import br.com.ceos.ribbon.util.StyleUtils;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.VPos;
@@ -27,7 +26,7 @@ import javafx.scene.text.Text;
 public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
 
   private final double PREF_WIDTH = 50;
-  private final double PREF_HEIGHT = 61;
+  private final double PREF_HEIGHT = 56;
   
   private HBox container;
   private StackPane iconeContainer;
@@ -63,9 +62,6 @@ public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
     icone.setFitWidth(32);
 
     iconeContainer = new StackPane(icone);
-    iconeContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    iconeContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
   }
 
   private void updateTextoContainer() {
@@ -73,9 +69,6 @@ public class WRibbonItemMediumSkin extends SkinBase<WRibbonItem> {
     texto.textProperty().bind(getSkinnable().textoProperty());
     
     textoContainer = new StackPane(texto);
-    textoContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    textoContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
   }
 
   @Override

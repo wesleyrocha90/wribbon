@@ -50,6 +50,9 @@ public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
 
     container = new VBox(itensContainer, textoContainer);
     container.setPadding(new Insets(5));
+    container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+    container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
+    
     getChildren().add(container);
   }
   
@@ -79,7 +82,7 @@ public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
     int pesoMaximo = 3;
     int pesoAcumulado = 0;
     
-    VBox coluna = new VBox(5);
+    VBox coluna = new VBox();
     for (WRibbonItem item : itens) {
       if(pesoAcumulado + item.getTipo().getPeso() <= pesoMaximo){
         coluna.getChildren().add(item);
@@ -87,7 +90,7 @@ public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
         pesoAcumulado += item.getTipo().getPeso();
       }else{
         container.getChildren().add(coluna);
-        coluna = new VBox(5);
+        coluna = new VBox();
         coluna.getChildren().add(item);
         
         pesoAcumulado = 0;

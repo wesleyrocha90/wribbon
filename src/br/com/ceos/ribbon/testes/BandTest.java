@@ -7,7 +7,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
@@ -16,7 +15,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -26,20 +24,29 @@ public class BandTest extends Application {
     HBox ribbon = new HBox(5);
     ribbon.setPadding(new Insets(5));
     ribbon.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    
-    WRibbonItem item0 = new WRibbonItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG);
-    WRibbonItem item1 = new WRibbonItem("Botão 1", new Image("Paste_32.png"), WItemKind.BIG);
-    WRibbonItem item2 = new WRibbonItem("Botão 2", new Image("Paste_32.png"), WItemKind.MEDIUM);
-    WRibbonItem item3 = new WRibbonItem("Botão 3", new Image("Paste_16.png"), WItemKind.SMALL);
-    WRibbonItem item4 = new WRibbonItem("Botão 4", new Image("Paste_16.png"), WItemKind.SMALL);
-    WRibbonItem item5 = new WRibbonItem("Botão 5", new Image("Paste_16.png"), WItemKind.SMALL);
-    WRibbonItem item6 = new WRibbonItem("Botão 6", new Image("Paste_16.png"), WItemKind.SMALL);
-    WRibbonItem item7 = new WRibbonItem("Botão 7", new Image("Paste_16.png"), WItemKind.ICON);
-    WRibbonItem item8 = new WRibbonItem("Botão 8", new Image("Paste_16.png"), WItemKind.ICON);
-    WRibbonItem item9 = new WRibbonItem("Botão 9", new Image("Paste_16.png"), WItemKind.ICON);
-    
+        
     WRibbonBand banda = new WRibbonBand("Principal", 
-        item0, item1, item2, item3, item4, item5, item6, item7, item8, item9);
+        new WRibbonItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
+        new WRibbonItem("Botão 1", new Image("Paste_32.png"), WItemKind.MEDIUM),
+        new WRibbonItem("Botão 2", new Image("Paste_16.png"), WItemKind.ICON), 
+        new WRibbonItem("Botão 1", new Image("Paste_32.png"), WItemKind.SMALL),
+        new WRibbonItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
+        new WRibbonItem("Botão 2", new Image("Paste_16.png"), WItemKind.MEDIUM), 
+        new WRibbonItem("Botão 1", new Image("Paste_32.png"), WItemKind.MEDIUM),
+        new WRibbonItem("Botão 2", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 5", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
+        new WRibbonItem("Botão 6", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 7", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 5", new Image("Paste_16.png"), WItemKind.ICON), 
+        new WRibbonItem("Botão 6", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 7", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
+        new WRibbonItem("Botão 5", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 6", new Image("Paste_16.png"), WItemKind.ICON), 
+        new WRibbonItem("Botão 7", new Image("Paste_16.png"), WItemKind.SMALL), 
+        new WRibbonItem("Botão 1", new Image("Paste_32.png"), WItemKind.ICON),
+        new WRibbonItem("Botão 2", new Image("Paste_16.png"), WItemKind.MEDIUM));
     
     ribbon.getChildren().addAll(banda);
     return ribbon;

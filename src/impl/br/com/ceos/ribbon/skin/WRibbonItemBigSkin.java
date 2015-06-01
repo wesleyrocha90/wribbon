@@ -29,7 +29,7 @@ import javafx.scene.text.Text;
 public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
 
   private final double PREF_WIDTH = 50;
-  private final double PREF_HEIGHT = 94;
+  private final double PREF_HEIGHT = 84;
   
   private VBox container;
   private StackPane iconeContainer;
@@ -66,9 +66,6 @@ public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
     icone.setFitWidth(32);
 
     iconeContainer = new StackPane(icone);
-    iconeContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    iconeContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
   }
 
   private void updateTextoContainer() {
@@ -81,9 +78,6 @@ public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
     
     textoContainer = new VBox(textoLinhaUm, textoLinhaDois);
     textoContainer.setAlignment(Pos.TOP_CENTER);
-    textoContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    textoContainer.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
-    
   }
 
   @Override

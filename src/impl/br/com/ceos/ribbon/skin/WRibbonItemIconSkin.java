@@ -76,4 +76,9 @@ public class WRibbonItemIconSkin extends SkinBase<WRibbonItem> {
   protected double computePrefHeight(double width, double topInset, double rightInset, double bottomInset, double leftInset) {
     return topInset + PREF_HEIGHT + bottomInset;
   }
+  
+  @Override
+  protected double computeMaxWidth(double height, double topInset, double rightInset, double bottomInset, double leftInset) {
+    return rightInset + PREF_WIDTH + leftInset;
+  }
 }
