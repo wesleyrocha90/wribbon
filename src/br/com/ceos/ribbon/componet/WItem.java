@@ -1,10 +1,10 @@
 package br.com.ceos.ribbon.componet;
 
 import br.com.ceos.ribbon.componet.enumeration.WItemKind;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemBigSkin;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemIconSkin;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemMediumSkin;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemSmallSkin;
+import impl.br.com.ceos.ribbon.skin.WItemBigSkin;
+import impl.br.com.ceos.ribbon.skin.WItemIconSkin;
+import impl.br.com.ceos.ribbon.skin.WItemMediumSkin;
+import impl.br.com.ceos.ribbon.skin.WItemSmallSkin;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -18,7 +18,7 @@ import javafx.scene.image.Image;
  * @author Wesley
  * @since May 28th 2015
  */
-public class WRibbonItem extends Control {
+public class WItem extends Control {
 
   /***************************************************************************
    *                                                                         *
@@ -26,19 +26,19 @@ public class WRibbonItem extends Control {
    *                                                                         *
    ***************************************************************************/
   
-  public WRibbonItem() {
+  public WItem() {
   }
 
-  public WRibbonItem(String texto) {
+  public WItem(String texto) {
     textoProperty().set(texto);
   }
 
-  public WRibbonItem(String texto, Image icone) {
+  public WItem(String texto, Image icone) {
     textoProperty().set(texto);
     iconeProperty().set(icone);
   }
 
-  public WRibbonItem(String texto, Image icone, WItemKind tipo) {
+  public WItem(String texto, Image icone, WItemKind tipo) {
     textoProperty().set(texto);
     iconeProperty().set(icone);
     tipoProperty().set(tipo);
@@ -75,15 +75,15 @@ public class WRibbonItem extends Control {
   protected Skin<?> createDefaultSkin() {
     switch(getTipo()){
       case BIG:
-        return new WRibbonItemBigSkin(this);
+        return new WItemBigSkin(this);
       case MEDIUM:
-        return new WRibbonItemMediumSkin(this);
+        return new WItemMediumSkin(this);
       case SMALL:
-        return new WRibbonItemSmallSkin(this);
+        return new WItemSmallSkin(this);
       case ICON:
-        return new WRibbonItemIconSkin(this);
+        return new WItemIconSkin(this);
     }
-    return new WRibbonItemBigSkin(this);
+    return new WItemBigSkin(this);
   }
 
   /***************************************************************************

@@ -1,6 +1,6 @@
 package impl.br.com.ceos.ribbon.skin;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.componet.WItem;
 import br.com.ceos.ribbon.util.StringUtils;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.HPos;
@@ -26,7 +26,7 @@ import javafx.scene.text.Text;
  * @author Wesley
  * @since May 28th 2015
  */
-public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
+public class WItemBigSkin extends SkinBase<WItem> {
 
   private final double PREF_WIDTH = 50;
   private final double PREF_HEIGHT = 84;
@@ -38,7 +38,7 @@ public class WRibbonItemBigSkin extends SkinBase<WRibbonItem> {
   private Text textoLinhaUm;
   private Text textoLinhaDois;
 
-  public WRibbonItemBigSkin(WRibbonItem control) {
+  public WItemBigSkin(WItem control) {
     super(control);
     updateItem();
   }

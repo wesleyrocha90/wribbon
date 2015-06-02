@@ -1,9 +1,7 @@
 package br.com.ceos.ribbon.container;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
-import impl.br.com.ceos.ribbon.skin.WRibbonBandSkin;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
+import br.com.ceos.ribbon.componet.WItem;
+import impl.br.com.ceos.ribbon.skin.WBandSkin;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -16,7 +14,7 @@ import javafx.scene.control.Skin;
  * @author Wesley
  * @since February 24th 2015
  */
-public class WRibbonBand extends Control{
+public class WBand extends Control{
   
   /***************************************************************************
    *                                                                         *
@@ -24,11 +22,11 @@ public class WRibbonBand extends Control{
    *                                                                         *
    ***************************************************************************/
   
-  public WRibbonBand(String texto) {
+  public WBand(String texto) {
     setTexto(texto);
   }
   
-  public WRibbonBand(String texto, WRibbonItem... itens) {
+  public WBand(String texto, WItem... itens) {
     setTexto(texto);
     setItens(FXCollections.observableArrayList(itens));
   }
@@ -46,16 +44,13 @@ public class WRibbonBand extends Control{
   public final String getTexto() { return textoProperty().get(); }
   public final void setTexto(String texto) { textoProperty().set(texto); }
   
-  private ObservableList<WRibbonItem> itens = FXCollections.observableArrayList();
-//  public ListProperty<WRibbonItem> itensProperty(){
-//    return itens != null ? itens : (itens = new SimpleListProperty<>(this, "itens"));
-//  }
-  public final ObservableList<WRibbonItem> getItens(){ return this.itens; }
-  public final void setItens(ObservableList<WRibbonItem> itens){ this.itens.setAll(itens); }
+  private ObservableList<WItem> itens = FXCollections.observableArrayList();
+  public final ObservableList<WItem> getItens(){ return this.itens; }
+  public final void setItens(ObservableList<WItem> itens){ this.itens.setAll(itens); }
 
   @Override
   protected Skin<?> createDefaultSkin() {
-    return new WRibbonBandSkin(this);
+    return new WBandSkin(this);
   }
 
   /***************************************************************************

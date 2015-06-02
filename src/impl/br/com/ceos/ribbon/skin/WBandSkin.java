@@ -1,8 +1,8 @@
 package impl.br.com.ceos.ribbon.skin;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.componet.WItem;
 import br.com.ceos.ribbon.componet.enumeration.WItemKind;
-import br.com.ceos.ribbon.container.WRibbonBand;
+import br.com.ceos.ribbon.container.WBand;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.ObservableList;
@@ -29,14 +29,14 @@ import javafx.scene.text.Text;
  * @author Wesley
  * @since May 30th 2015
  */
-public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
+public class WBandSkin extends SkinBase<WBand>{
   
   private VBox container;
   private HBox itensContainer;
   private StackPane textoContainer;
   private Text texto;
   
-  public WRibbonBandSkin(WRibbonBand control) {
+  public WBandSkin(WBand control) {
     super(control);
     updateItem();
   }
@@ -60,7 +60,7 @@ public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
     itensContainer = new HBox();
     itensContainer.setSpacing(5);
     
-    ObservableList<WRibbonItem> itens = getSkinnable().getItens();
+    ObservableList<WItem> itens = getSkinnable().getItens();
     layoutColumns(itensContainer, itens);
   }
   
@@ -78,12 +78,12 @@ public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
     layoutInArea(container, contentX, contentY, contentWidth, contentHeight, -1, HPos.CENTER, VPos.CENTER);
   }
   
-  private void layoutColumns(HBox container, ObservableList<WRibbonItem> itens){
+  private void layoutColumns(HBox container, ObservableList<WItem> itens){
     int pesoMaximo = 3;
     int pesoAcumulado = 0;
     
     VBox coluna = new VBox();
-    for (WRibbonItem item : itens) {
+    for (WItem item : itens) {
       if(pesoAcumulado + item.getTipo().getPeso() <= pesoMaximo){
         coluna.getChildren().add(item);
         

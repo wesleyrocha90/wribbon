@@ -1,6 +1,6 @@
 package br.com.ceos.ribbon.testes;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.componet.WItem;
 import br.com.ceos.ribbon.componet.enumeration.WItemKind;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -21,22 +21,22 @@ import javafx.stage.Stage;
 
 public class ItemTest extends Application {
 
-  private WRibbonItem item1, item2, item3, item4, item5, item6, item7, item8, item9;
+  private WItem item1, item2, item3, item4, item5, item6, item7, item8, item9;
 
   private Node criaRibbon() {
     HBox ribbon = new HBox(5);
     ribbon.setPadding(new Insets(5));
     ribbon.setBackground(new Background(new BackgroundFill(Color.AQUA, CornerRadii.EMPTY, Insets.EMPTY)));
 
-    item1 = new WRibbonItem("Botão", new Image("Paste_32.png"), WItemKind.BIG);
-    item2 = new WRibbonItem("Botão", new Image("Paste_32.png"), WItemKind.MEDIUM);
-    item3 = new WRibbonItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
-    item4 = new WRibbonItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
-    item5 = new WRibbonItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
-    item6 = new WRibbonItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
-    item7 = new WRibbonItem("Botão", new Image("Paste_16.png"), WItemKind.ICON);
-    item8 = new WRibbonItem("Botão", new Image("Paste_16.png"), WItemKind.ICON);
-    item9 = new WRibbonItem("Botão", new Image("Paste_16.png"), WItemKind.ICON);
+    item1 = new WItem("Botão", new Image("Paste_32.png"), WItemKind.BIG);
+    item2 = new WItem("Botão", new Image("Paste_32.png"), WItemKind.MEDIUM);
+    item3 = new WItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
+    item4 = new WItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
+    item5 = new WItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
+    item6 = new WItem("Botão", new Image("Paste_16.png"), WItemKind.SMALL);
+    item7 = new WItem("Botão", new Image("Paste_16.png"), WItemKind.ICON);
+    item8 = new WItem("Botão", new Image("Paste_16.png"), WItemKind.ICON);
+    item9 = new WItem("Botão", new Image("Paste_16.png"), WItemKind.ICON);
     
     VBox column1 = new VBox(item1);
     VBox column2 = new VBox(5, item2, item3);

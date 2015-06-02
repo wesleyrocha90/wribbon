@@ -1,6 +1,6 @@
 package impl.br.com.ceos.ribbon.skin;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.componet.WItem;
 import br.com.ceos.ribbon.util.StyleUtils;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -24,7 +24,7 @@ import javafx.scene.text.Text;
  * @author Wesley
  * @since May 28th 2015
  */
-public class WRibbonItemSmallSkin extends SkinBase<WRibbonItem> {
+public class WItemSmallSkin extends SkinBase<WItem> {
 
   private final double PREF_WIDTH = 50;
   private final double PREF_HEIGHT = 25;
@@ -35,7 +35,7 @@ public class WRibbonItemSmallSkin extends SkinBase<WRibbonItem> {
   private StackPane textoContainer;
   private Text texto;
 
-  public WRibbonItemSmallSkin(WRibbonItem control) {
+  public WItemSmallSkin(WItem control) {
     super(control);
     updateItem();
   }
