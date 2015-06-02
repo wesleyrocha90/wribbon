@@ -1,6 +1,6 @@
 package impl.br.com.ceos.ribbon.skin;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.componet.WItem;
 import br.com.ceos.ribbon.util.StyleUtils;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -23,7 +23,7 @@ import javafx.scene.paint.Color;
  * @author Wesley
  * @since May 30th 2015
  */
-public class WRibbonItemIconSkin extends SkinBase<WRibbonItem> {
+public class WRibbonItemIconSkin extends SkinBase<WItem> {
 
   private final double PREF_WIDTH = 25;
   private final double PREF_HEIGHT = 25;
@@ -32,7 +32,7 @@ public class WRibbonItemIconSkin extends SkinBase<WRibbonItem> {
   private StackPane iconeContainer;
   private ImageView icone;
 
-  public WRibbonItemIconSkin(WRibbonItem control) {
+  public WRibbonItemIconSkin(WItem control) {
     super(control);
     updateItem();
   }

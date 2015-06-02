@@ -1,10 +1,7 @@
 package impl.br.com.ceos.ribbon.skin;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
-import br.com.ceos.ribbon.componet.enumeration.WItemKind;
+import br.com.ceos.ribbon.componet.WItem;
 import br.com.ceos.ribbon.container.WRibbonBand;
-import java.util.ArrayList;
-import java.util.List;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -60,7 +57,7 @@ public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
     itensContainer = new HBox();
     itensContainer.setSpacing(5);
     
-    ObservableList<WRibbonItem> itens = getSkinnable().getItens();
+    ObservableList<WItem> itens = getSkinnable().getItens();
     layoutColumns(itensContainer, itens);
   }
   
@@ -78,12 +75,12 @@ public class WRibbonBandSkin extends SkinBase<WRibbonBand>{
     layoutInArea(container, contentX, contentY, contentWidth, contentHeight, -1, HPos.CENTER, VPos.CENTER);
   }
   
-  private void layoutColumns(HBox container, ObservableList<WRibbonItem> itens){
+  private void layoutColumns(HBox container, ObservableList<WItem> itens){
     int pesoMaximo = 3;
     int pesoAcumulado = 0;
     
     VBox coluna = new VBox();
-    for (WRibbonItem item : itens) {
+    for (WItem item : itens) {
       if(pesoAcumulado + item.getTipo().getPeso() <= pesoMaximo){
         coluna.getChildren().add(item);
         

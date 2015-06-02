@@ -1,6 +1,6 @@
 package br.com.ceos.ribbon.container;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
+import br.com.ceos.ribbon.componet.WItem;
 import impl.br.com.ceos.ribbon.skin.WRibbonBandSkin;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
@@ -28,7 +28,7 @@ public class WRibbonBand extends Control{
     setTexto(texto);
   }
   
-  public WRibbonBand(String texto, WRibbonItem... itens) {
+  public WRibbonBand(String texto, WItem... itens) {
     setTexto(texto);
     setItens(FXCollections.observableArrayList(itens));
   }
@@ -46,12 +46,12 @@ public class WRibbonBand extends Control{
   public final String getTexto() { return textoProperty().get(); }
   public final void setTexto(String texto) { textoProperty().set(texto); }
   
-  private ObservableList<WRibbonItem> itens = FXCollections.observableArrayList();
+  private ObservableList<WItem> itens = FXCollections.observableArrayList();
 //  public ListProperty<WRibbonItem> itensProperty(){
 //    return itens != null ? itens : (itens = new SimpleListProperty<>(this, "itens"));
 //  }
-  public final ObservableList<WRibbonItem> getItens(){ return this.itens; }
-  public final void setItens(ObservableList<WRibbonItem> itens){ this.itens.setAll(itens); }
+  public final ObservableList<WItem> getItens(){ return this.itens; }
+  public final void setItens(ObservableList<WItem> itens){ this.itens.setAll(itens); }
 
   @Override
   protected Skin<?> createDefaultSkin() {

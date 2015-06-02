@@ -1,6 +1,5 @@
 package br.com.ceos.ribbon.componet.enumeration;
 
-import br.com.ceos.ribbon.componet.WRibbonItem;
 import br.com.ceos.ribbon.container.WRibbonBand;
 
 /**
@@ -18,26 +17,26 @@ public enum WItemKind {
   BIG(3),
 
   /**
-   * O {@link WRibbonItem Item} é exibido com uma altura que ocupa duas linhas do layout da 
+   * O {@link WItem Item} é exibido com uma altura que ocupa duas linhas do layout da 
    * {@link WRibbonBand Banda}. Ele é exibido com o ícone a esquerda e o texto a direita.
    */
   MEDIUM(2),
   
   /**
-   * O {@link WRibbonItem Item} é exibido com uma altura que ocupa apenas uma linha do layout da 
+   * O {@link WItem Item} é exibido com uma altura que ocupa apenas uma linha do layout da 
    * {@link WRibbonBand Banda}. Ele é exibido com o ícone a esquerda e o texto a direita.
    */
   SMALL(1),
   
   /**
-   * O {@link WRibbonItem Item} é exibido com uma altura que ocupa apenas uma linha do layout da 
+   * O {@link WItem Item} é exibido com uma altura que ocupa apenas uma linha do layout da 
    * {@link WRibbonBand Banda}. Apenas o ícone é exibido neste caso.
    */
   ICON(1),
     
   /**
-   * O {@link WRibbonItem Item} é exibido com uma altura fixa, essa exibição é usada apenas nos menus. 
-   * Uma descrição é exibida abaixo do Título do {@link WRibbonItem Item} neste caso.
+   * O {@link WItem Item} é exibido com uma altura fixa, essa exibição é usada apenas nos menus. 
+   * Uma descrição é exibida abaixo do Título do {@link WItem Item} neste caso.
    */
   TILE(2);
   
