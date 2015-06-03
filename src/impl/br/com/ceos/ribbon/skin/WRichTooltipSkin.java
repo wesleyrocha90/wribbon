@@ -1,15 +1,12 @@
 package impl.br.com.ceos.ribbon.skin;
 
 import br.com.ceos.ribbon.componet.WRichTooltip;
-import com.sun.javafx.scene.control.behavior.BehaviorBase;
-import com.sun.javafx.scene.control.behavior.KeyBinding;
-import com.sun.javafx.scene.control.skin.BehaviorSkinBase;
-import java.util.Collections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
+import javafx.scene.control.SkinBase;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
@@ -32,12 +29,14 @@ import javafx.scene.text.FontWeight;
  * @author Wesley
  * @since 01 de Dezembro de 2014
  */
-public class WRichTooltipSkin extends BehaviorSkinBase<WRichTooltip, BehaviorBase<WRichTooltip>> {
+public class WRichTooltipSkin extends SkinBase<WRichTooltip> {
 
   private final VBox container;
 
   public WRichTooltipSkin(WRichTooltip control) {
-    super(control, new BehaviorBase<>(control, Collections.<KeyBinding>emptyList()));
+    super(control);
+    control.setMaxHeight(Region.USE_PREF_SIZE);
+    
     container = new VBox();
     getChildren().add(container);
     updateWRichTooltip();

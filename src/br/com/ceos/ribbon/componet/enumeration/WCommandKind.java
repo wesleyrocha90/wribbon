@@ -6,7 +6,7 @@ package br.com.ceos.ribbon.componet.enumeration;
  * @author Wesley
  * @since 05 de Dezembro de 2014
  */
-public enum WButtonKind {
+public enum WCommandKind {
   
   /**
    * Botão que possui apenas uma área clicável que ativa sua ação
@@ -43,7 +43,7 @@ public enum WButtonKind {
    * @param acao - se o botão possui uma ação
    * @param popup - se o botão possui um popup
    */
-  private WButtonKind(boolean acao, boolean popup){
+  private WCommandKind(boolean acao, boolean popup){
     this.acao = acao;
     this.popup = popup;
   }
