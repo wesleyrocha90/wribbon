@@ -1,8 +1,11 @@
 package impl.br.com.ceos.ribbon.skin;
 
 import br.com.ceos.ribbon.componet.WItem;
+import br.com.ceos.ribbon.componet.enumeration.WCommandKind;
+import br.com.ceos.ribbon.util.SVGUtils;
 import br.com.ceos.ribbon.util.StringUtils;
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,9 +19,11 @@ import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
 import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.scene.text.Text;
 
 /**
@@ -29,7 +34,7 @@ import javafx.scene.text.Text;
 public class WItemBigSkin extends SkinBase<WItem> {
 
   private final double PREF_WIDTH = 50;
-  private final double PREF_HEIGHT = 84;
+  private final double PREF_HEIGHT = 85;
   
   private VBox container;
   private StackPane iconeContainer;
@@ -40,6 +45,8 @@ public class WItemBigSkin extends SkinBase<WItem> {
 
   public WItemBigSkin(WItem control) {
     super(control);
+    control.textoProperty().addListener((ob, nv, ov) -> control.requestLayout());
+    
     updateItem();
   }
 
@@ -53,9 +60,8 @@ public class WItemBigSkin extends SkinBase<WItem> {
     container = new VBox(iconeContainer, textoContainer);
     container.setSpacing(5);
     container.setPadding(new Insets(5));
-    container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-    container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
     
+    container.setOnMouseClicked(event -> getSkinnable().fireEvent(new ActionEvent()));
     getChildren().add(container);
   }
 
@@ -76,7 +82,21 @@ public class WItemBigSkin extends SkinBase<WItem> {
     textoLinhaDois.textProperty().bind(Bindings.createStringBinding(
         () -> StringUtils.splitInTwo(getSkinnable().textoProperty().get())[1], getSkinnable().textoProperty()));
     
-    textoContainer = new VBox(textoLinhaUm, textoLinhaDois);
+    textoContainer = new VBox(textoLinhaUm);
+    if(getSkinnable().getTipoComando() != WCommandKind.ACAO_SOMENTE){
+      StackPane trianglePopupContainer = new StackPane(SVGUtils.triangleUpsideDown());
+      trianglePopupContainer.setPrefHeight(10);
+      if(textoLinhaDois.getText() != null && !"".equals(textoLinhaDois.getText())){
+        HBox linhaDoisContainer = new HBox(2, textoLinhaDois, trianglePopupContainer);
+        linhaDoisContainer.setAlignment(Pos.CENTER);
+        textoContainer.getChildren().add(linhaDoisContainer);
+      }else{
+        textoContainer.getChildren().add(trianglePopupContainer);
+      }
+    }else if(textoLinhaDois.getText() != null && !"".equals(textoLinhaDois.getText())){
+      textoContainer.getChildren().add(textoLinhaDois);
+    }
+        
     textoContainer.setAlignment(Pos.TOP_CENTER);
   }
 

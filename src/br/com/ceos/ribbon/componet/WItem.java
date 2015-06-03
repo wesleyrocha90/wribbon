@@ -2,10 +2,7 @@ package br.com.ceos.ribbon.componet;
 
 import br.com.ceos.ribbon.componet.enumeration.WCommandKind;
 import br.com.ceos.ribbon.componet.enumeration.WItemKind;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemBigSkin;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemIconSkin;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemMediumSkin;
-import impl.br.com.ceos.ribbon.skin.WRibbonItemSmallSkin;
+import impl.br.com.ceos.ribbon.skin.WItemBigSkin;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +18,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Control;
 import javafx.scene.control.Skin;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  *
@@ -149,6 +148,15 @@ public class WItem extends Control {
   public final EventHandler<ActionEvent> getOnAction() { return onAction.get(); }
   public final void setOnAction(EventHandler<ActionEvent> onAction) { this.onAction.set(onAction); }
   
+  /**
+   * O preenchimento de fundo item
+   */
+  public ObjectProperty<Paint> backgroundColor = 
+      new SimpleObjectProperty<>(this, "backgroundColor", Color.WHITE);
+  public final ObjectProperty<Paint> backgroundColorProperty() { return backgroundColor; }
+  public final Paint getBackgroundColor() { return backgroundColor.get(); }
+  public final void setBackgroundColor(Paint backgroundColor) { this.backgroundColor.set(backgroundColor); }
+  
   /***************************************************************************
    *                                                                         *
    * Methods                                                                 *
@@ -158,17 +166,17 @@ public class WItem extends Control {
   /** {@inheritDoc} */
   @Override
   protected Skin<?> createDefaultSkin() {
-    switch(getTipo()){
-      case BIG:
-        return new WRibbonItemBigSkin(this);
-      case MEDIUM:
-        return new WRibbonItemMediumSkin(this);
-      case SMALL:
-        return new WRibbonItemSmallSkin(this);
-      case ICON:
-        return new WRibbonItemIconSkin(this);
-    }
-    return new WRibbonItemBigSkin(this);
+//    switch(getTipo()){
+//      case BIG:
+//        return new WItemBigSkin(this);
+//      case MEDIUM:
+//        return new WItemMediumSkin(this);
+//      case SMALL:
+//        return new WItemSmallSkin(this);
+//      case ICON:
+//        return new WItemIconSkin(this);
+//    }
+    return new WItemBigSkin(this);
   }
 
   /***************************************************************************
@@ -177,7 +185,7 @@ public class WItem extends Control {
    *                                                                         *
    ***************************************************************************/
   
-  private static class StyleableProperties {
+  private static class StyleableProperties {    
     private static final List<CssMetaData<? extends Styleable, ?>> STYLEABLES;
     static{
       final List<CssMetaData<? extends Styleable, ?>> styleables =

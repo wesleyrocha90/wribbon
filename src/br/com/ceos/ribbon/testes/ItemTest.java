@@ -1,6 +1,7 @@
 package br.com.ceos.ribbon.testes;
 
 import br.com.ceos.ribbon.componet.WItem;
+import br.com.ceos.ribbon.componet.enumeration.WCommandKind;
 import br.com.ceos.ribbon.componet.enumeration.WItemKind;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -8,8 +9,10 @@ import javafx.geometry.Orientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -17,40 +20,42 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.SVGPath;
 import javafx.stage.Stage;
 
 public class ItemTest extends Application {
 
-  private WItem item1, item2, item3, item4, item5, item6;
+  private WItem item1, item2;
 
   private Node criaRibbon() {
     FlowPane ribbon = new FlowPane();
     ribbon.setOrientation(Orientation.VERTICAL);
-//    ribbon.setHgap(5);
-//    ribbon.setVgap(5);
     ribbon.setMaxHeight(85);
     ribbon.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
     item1 = new WItem("Colar Especial", new Image("Paste_32.png"), WItemKind.BIG);
-    item2 = new WItem("Recortar", new Image("Paste_32.png"), WItemKind.SMALL);
-    item3 = new WItem("Copiar", new Image("Paste_32.png"), WItemKind.SMALL);
-    item4 = new WItem("Formatar Pincel", new Image("Paste_32.png"), WItemKind.SMALL);
-    item5 = new WItem("Botão", new Image("Paste_32.png"), WItemKind.SMALL);
-    item6 = new WItem("Botão", new Image("Paste_32.png"), WItemKind.SMALL);
+    item1.setTipoComando(WCommandKind.ACAO_SOMENTE);
+    item1.setOnAction(event -> System.out.println("Item1 clicado"));
     
-    ribbon.getChildren().addAll(item1, item2, item3, item4, item5, item6);
+    item2 = new WItem("Recortar", new Image("Paste_32.png"), WItemKind.BIG);
+    item2.setTipoComando(WCommandKind.ACAO_E_POPUP_PRINCIPAL_ACAO);
+    item2.setOnAction(event -> System.out.println("Item2 clicado"));
+    
+    ribbon.getChildren().addAll(item1, item2);
     return ribbon;
   }
 
   private Node criaPainelCentral() {
-    Button botao1 = new Button("Troca texto do item1");
-    botao1.setOnAction(event -> item1.setTexto("Texto trocado por um bem grande"));
+    Label label1 = new Label("Mudar texto botão1");
+    TextField field1 = new TextField();
+    Button button1 = new Button("Troca");
+    button1.setOnAction(event -> item1.setTexto(field1.getText()));
+    HBox mudanca1 = new HBox(label1, field1, button1);
     
-    VBox tabRoot = new VBox(botao1);
-    return new TabPane(new Tab("Cliente", tabRoot), new Tab("Vendas"));
+    VBox tabRoot = new VBox(mudanca1);
+    return new TabPane(new Tab("Teste de mudanças de propriedades", tabRoot));
   }
 
   @Override
