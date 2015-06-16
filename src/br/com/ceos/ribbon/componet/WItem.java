@@ -49,6 +49,7 @@ public class WItem extends Control {
     setTexto(texto);
     setIcone(icone);
     setTipo(tipo);
+    getStyleClass().add(DEFAULT_STYLE_CLASS);
   }
 
   /***************************************************************************
@@ -197,4 +198,6 @@ public class WItem extends Control {
   public static List<CssMetaData<? extends Styleable, ?>> getClassCssMetaData() {
     return StyleableProperties.STYLEABLES;
   }
+  
+  private static final String DEFAULT_STYLE_CLASS = "w-item";
 }

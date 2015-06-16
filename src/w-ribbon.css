@@ -1,0 +1,5 @@
+.w-item{
+  -fx-background-color: linear-gradient(#CCCCCC 60%, #000000 100%),
+                        linear-gradient(#CCCCCC 0%, #FFFFFF 100%);
+  -fx-background-insets: 0, 1;
+}

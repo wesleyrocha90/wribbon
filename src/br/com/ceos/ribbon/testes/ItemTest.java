@@ -27,23 +27,24 @@ import javafx.stage.Stage;
 
 public class ItemTest extends Application {
 
-  private WItem item1, item2;
+  private WItem item1, item2, item3;
 
   private Node criaRibbon() {
-    FlowPane ribbon = new FlowPane();
-    ribbon.setOrientation(Orientation.VERTICAL);
-    ribbon.setMaxHeight(85);
+    HBox ribbon = new HBox(2);
+    ribbon.setPadding(new Insets(2));
     ribbon.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
 
-    item1 = new WItem("Colar Especial", new Image("Paste_32.png"), WItemKind.BIG);
+    item1 = new WItem("Marca D'água", new Image("Paste_32.png"));
     item1.setTipoComando(WCommandKind.ACAO_SOMENTE);
     item1.setOnAction(event -> System.out.println("Item1 clicado"));
-    
-    item2 = new WItem("Recortar", new Image("Paste_32.png"), WItemKind.BIG);
-    item2.setTipoComando(WCommandKind.ACAO_E_POPUP_PRINCIPAL_ACAO);
+
+    item2 = new WItem("Cor da Página", new Image("Paste_32.png"));
     item2.setOnAction(event -> System.out.println("Item2 clicado"));
-    
-    ribbon.getChildren().addAll(item1, item2);
+
+    item3 = new WItem("Bordas de Página", new Image("Paste_32.png"));
+    item3.setOnAction(event -> System.out.println("Item3 clicado"));
+
+    ribbon.getChildren().addAll(item1, item2, item3);
     return ribbon;
   }
 
@@ -53,8 +54,11 @@ public class ItemTest extends Application {
     Button button1 = new Button("Troca");
     button1.setOnAction(event -> item1.setTexto(field1.getText()));
     HBox mudanca1 = new HBox(label1, field1, button1);
-    
-    VBox tabRoot = new VBox(mudanca1);
+
+    Label textoItem1 = new Label();
+    textoItem1.textProperty().bind(item1.textoProperty());
+
+    VBox tabRoot = new VBox(mudanca1, textoItem1);
     return new TabPane(new Tab("Teste de mudanças de propriedades", tabRoot));
   }
 
@@ -65,6 +69,7 @@ public class ItemTest extends Application {
     root.setCenter(criaPainelCentral());
 
     Scene scene = new Scene(root, 400, 200);
+    scene.getStylesheets().add("w-ribbon.css");
     stage.setScene(scene);
     stage.show();
   }
