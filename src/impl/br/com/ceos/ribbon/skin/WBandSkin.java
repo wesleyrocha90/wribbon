@@ -50,6 +50,7 @@ public class WBandSkin extends SkinBase<WBand>{
 
     container = new VBox(itensContainer, textoContainer);
     container.setPadding(new Insets(5));
+    container.setSpacing(5);
     container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
     

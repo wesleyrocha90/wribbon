@@ -26,27 +26,9 @@ public class BandTest extends Application {
     ribbon.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         
     WBand banda = new WBand("Principal", 
-        new WItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
-        new WItem("Botão 1", new Image("Paste_32.png"), WItemKind.MEDIUM),
-        new WItem("Botão 2", new Image("Paste_16.png"), WItemKind.ICON), 
-        new WItem("Botão 1", new Image("Paste_32.png"), WItemKind.SMALL),
-        new WItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
-        new WItem("Botão 2", new Image("Paste_16.png"), WItemKind.MEDIUM), 
-        new WItem("Botão 1", new Image("Paste_32.png"), WItemKind.MEDIUM),
-        new WItem("Botão 2", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 5", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
-        new WItem("Botão 6", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 7", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 5", new Image("Paste_16.png"), WItemKind.ICON), 
-        new WItem("Botão 6", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 7", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 0", new Image("Paste_32.png"), WItemKind.BIG),
-        new WItem("Botão 5", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 6", new Image("Paste_16.png"), WItemKind.ICON), 
-        new WItem("Botão 7", new Image("Paste_16.png"), WItemKind.SMALL), 
-        new WItem("Botão 1", new Image("Paste_32.png"), WItemKind.ICON),
-        new WItem("Botão 2", new Image("Paste_16.png"), WItemKind.MEDIUM));
+        new WItem("Formatação Condicional", new Image("Paste_32.png")),
+        new WItem("Formatar como Tabela", new Image("Paste_32.png")),
+        new WItem("Estilos de Célula", new Image("Paste_32.png")));
     
     ribbon.getChildren().addAll(banda);
     return ribbon;
@@ -63,6 +45,7 @@ public class BandTest extends Application {
     root.setCenter(criaPainelCentral());
 
     Scene scene = new Scene(root, 400, 200);
+    scene.getStylesheets().add("w-ribbon.css");
     stage.setScene(scene);
     stage.show();
   }
