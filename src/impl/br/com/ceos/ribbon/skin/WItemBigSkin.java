@@ -46,6 +46,7 @@ public class WItemBigSkin extends SkinBase<WItem> {
 
   public WItemBigSkin(WItem control) {
     super(control);
+    control.textoProperty().addListener((ob, ov, nv) -> control.requestLayout());
 
     updateItem();
   }
