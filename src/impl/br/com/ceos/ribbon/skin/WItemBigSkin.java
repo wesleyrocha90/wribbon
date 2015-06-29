@@ -46,7 +46,7 @@ public class WItemBigSkin extends SkinBase<WItem> {
 
   public WItemBigSkin(WItem control) {
     super(control);
-    control.textoProperty().addListener((ob, ov, nv) -> control.requestLayout());
+    control.textProperty().addListener((ob, ov, nv) -> control.requestLayout());
 
     updateItem();
   }
@@ -66,7 +66,7 @@ public class WItemBigSkin extends SkinBase<WItem> {
 
   private void updateIconeContainer() {
     icone = new ImageView();
-    icone.imageProperty().bind(getSkinnable().iconeProperty());
+    icone.imageProperty().bind(getSkinnable().iconProperty());
     icone.setFitHeight(32);
     icone.setFitWidth(32);
 
@@ -77,9 +77,9 @@ public class WItemBigSkin extends SkinBase<WItem> {
     textoLinhaUm = new Label();
     textoLinhaDois = new Label();
     textoLinhaUm.textProperty().bind(Bindings.createStringBinding(
-        () -> StringUtils.splitInTwo(getSkinnable().textoProperty().get())[0], getSkinnable().textoProperty()));
+        () -> StringUtils.splitInTwo(getSkinnable().textProperty().get())[0], getSkinnable().textProperty()));
     textoLinhaDois.textProperty().bind(Bindings.createStringBinding(
-        () -> StringUtils.splitInTwo(getSkinnable().textoProperty().get())[1], getSkinnable().textoProperty()));
+        () -> StringUtils.splitInTwo(getSkinnable().textProperty().get())[1], getSkinnable().textProperty()));
 
     textoContainer = new VBox(textoLinhaUm);
     if (getSkinnable().getTipoComando() != WCommandKind.ACAO_SOMENTE) {

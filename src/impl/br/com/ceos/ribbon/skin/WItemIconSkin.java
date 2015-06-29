@@ -54,7 +54,7 @@ public class WItemIconSkin extends SkinBase<WItem> {
 
   private void updateIconeContainer() {
     icone = new ImageView();
-    icone.imageProperty().bind(getSkinnable().iconeProperty());
+    icone.imageProperty().bind(getSkinnable().iconProperty());
     icone.setFitHeight(16);
     icone.setFitWidth(16);
 

@@ -29,63 +29,59 @@ import javafx.scene.paint.Paint;
 public class WItem extends Control {
 
   /***************************************************************************
-   *                                                                         *
    * Constructors                                                            *
-   *                                                                         *
    ***************************************************************************/
   
   public WItem() {
   }
 
-  public WItem(String texto) {
-    this(texto, null, WItemKind.BIG);
+  public WItem(String text) {
+    this(text, null, WItemKind.BIG);
   }
 
-  public WItem(String texto, Image icone) {
-    this(texto, icone, WItemKind.BIG);
+  public WItem(String text, Image icon) {
+    this(text, icon, WItemKind.BIG);
   }
 
-  public WItem(String texto, Image icone, WItemKind tipo) {
-    setTexto(texto);
-    setIcone(icone);
-    setTipo(tipo);
+  public WItem(String text, Image icon, WItemKind kind) {
+    setText(text);
+    setIcon(icon);
+    setTipo(kind);
     getStyleClass().add(DEFAULT_STYLE_CLASS);
   }
 
   /***************************************************************************
-   *                                                                         *
    * Properties                                                              *
-   *                                                                         *
    ***************************************************************************/
   
   /**
    * O texto do item
    */
-  private StringProperty texto;
-  public StringProperty textoProperty() {
-    return texto != null ? texto : (texto = new SimpleStringProperty(this, "texto", ""));
+  private StringProperty text;
+  public StringProperty textProperty() {
+    return text != null ? text : (text = new SimpleStringProperty(this, "text", ""));
   }
-  public final String getTexto() { return texto == null ? "" : texto.get(); }
-  public final void setTexto(String texto) { textoProperty().set(texto); }
+  public final String getText() { return text == null ? "" : text.get(); }
+  public final void setText(String text) { textProperty().set(text); }
 
   /**
    * O ícone do item
    */
-  private ObjectProperty<Image> icone;
-  public ObjectProperty<Image> iconeProperty() {
-    return icone != null ? icone : (icone = new SimpleObjectProperty<>(this, "icone"));
+  private ObjectProperty<Image> icon;
+  public ObjectProperty<Image> iconProperty() {
+    return icon != null ? icon : (icon = new SimpleObjectProperty<>(this, "icon"));
   }
-  public final Image getIcone() { return iconeProperty().get(); }
-  public final void setIcone(Image icone) { iconeProperty().set(icone); }
+  public final Image getIcon() { return iconProperty().get(); }
+  public final void setIcon(Image icon) { iconProperty().set(icon); }
   
   /**
    * O tipo de exibição do item
    */
-  private ObjectProperty<WItemKind> tipo = 
-      new SimpleObjectProperty<>(this, "tipo", WItemKind.BIG);
-  public final ObjectProperty<WItemKind> tipoProperty() { return tipo; }
-  public final WItemKind getTipo() { return tipo.get(); }
-  public final void setTipo(WItemKind tipo) { this.tipo.set(tipo); }
+  private ObjectProperty<WItemKind> kind = 
+      new SimpleObjectProperty<>(this, "kind", WItemKind.BIG);
+  public final ObjectProperty<WItemKind> tipoProperty() { return kind; }
+  public final WItemKind getTipo() { return kind.get(); }
+  public final void setTipo(WItemKind tipo) { this.kind.set(tipo); }
   
   /**
    * O tipo de comando do item
@@ -149,19 +145,8 @@ public class WItem extends Control {
   public final EventHandler<ActionEvent> getOnAction() { return onAction.get(); }
   public final void setOnAction(EventHandler<ActionEvent> onAction) { this.onAction.set(onAction); }
   
-  /**
-   * O preenchimento de fundo item
-   */
-  public ObjectProperty<Paint> backgroundColor = 
-      new SimpleObjectProperty<>(this, "backgroundColor", Color.WHITE);
-  public final ObjectProperty<Paint> backgroundColorProperty() { return backgroundColor; }
-  public final Paint getBackgroundColor() { return backgroundColor.get(); }
-  public final void setBackgroundColor(Paint backgroundColor) { this.backgroundColor.set(backgroundColor); }
-  
   /***************************************************************************
-   *                                                                         *
    * Methods                                                                 *
-   *                                                                         *
    **************************************************************************/
   
   /** {@inheritDoc} */
@@ -181,9 +166,7 @@ public class WItem extends Control {
   }
 
   /***************************************************************************
-   *                                                                         *
    * Stylesheet Handling                                                     *
-   *                                                                         *
    ***************************************************************************/
   
   private static class StyleableProperties {    

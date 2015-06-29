@@ -52,11 +52,11 @@ public class ItemTest extends Application {
     Label label1 = new Label("Mudar texto botão1");
     TextField field1 = new TextField();
     Button button1 = new Button("Troca");
-    button1.setOnAction(event -> item1.setTexto(field1.getText()));
+    button1.setOnAction(event -> item1.setText(field1.getText()));
     HBox mudanca1 = new HBox(label1, field1, button1);
 
     Label textoItem1 = new Label();
-    textoItem1.textProperty().bind(item1.textoProperty());
+    textoItem1.textProperty().bind(item1.textProperty());
 
     VBox tabRoot = new VBox(mudanca1, textoItem1);
     return new TabPane(new Tab("Teste de mudanças de propriedades", tabRoot));

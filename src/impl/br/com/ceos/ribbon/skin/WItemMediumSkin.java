@@ -57,7 +57,7 @@ public class WItemMediumSkin extends SkinBase<WItem> {
 
   private void updateIconeContainer() {
     icone = new ImageView();
-    icone.imageProperty().bind(getSkinnable().iconeProperty());
+    icone.imageProperty().bind(getSkinnable().iconProperty());
     icone.setFitHeight(32);
     icone.setFitWidth(32);
 
@@ -66,7 +66,7 @@ public class WItemMediumSkin extends SkinBase<WItem> {
 
   private void updateTextoContainer() {
     texto = new Text();
-    texto.textProperty().bind(getSkinnable().textoProperty());
+    texto.textProperty().bind(getSkinnable().textProperty());
     
     textoContainer = new StackPane(texto);
   }

@@ -49,8 +49,8 @@ public class WBandSkin extends SkinBase<WBand>{
     updateTextoContainer();
 
     container = new VBox(itensContainer, textoContainer);
-    container.setPadding(new Insets(5));
-    container.setSpacing(5);
+    container.setPadding(new Insets(2));
+    container.setSpacing(2);
     container.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
     container.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(1))));
     
@@ -59,7 +59,7 @@ public class WBandSkin extends SkinBase<WBand>{
   
   private void updateItensContainer(){
     itensContainer = new HBox();
-    itensContainer.setSpacing(5);
+    itensContainer.setSpacing(2);
     
     ObservableList<WItem> itens = getSkinnable().getItens();
     layoutColumns(itensContainer, itens);
